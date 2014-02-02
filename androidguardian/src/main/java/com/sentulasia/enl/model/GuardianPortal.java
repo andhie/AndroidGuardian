@@ -151,7 +151,7 @@ public class GuardianPortal {
         if (isLive) {
             DateTime now = DateTime.now();
             return Days.daysBetween(captured_date, now).getDays();
-            
+
         } else {
             return Days.daysBetween(captured_date, destruction_date).getDays();
 

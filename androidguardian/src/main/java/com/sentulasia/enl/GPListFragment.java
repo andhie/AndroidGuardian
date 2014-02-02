@@ -20,9 +20,11 @@ import com.sentulasia.enl.util.PortalSorter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -35,6 +37,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -96,6 +99,7 @@ public class GPListFragment extends Fragment implements
         mHeaderSubtitle = (TextView) header.findViewById(R.id.subtitle);
 
         mListView.addHeaderView(header, null, false);
+        mListView.setOnItemClickListener(onItemClick);
 
         EventBus.getDefault().register(this);
         setHasOptionsMenu(true);
@@ -407,5 +411,52 @@ public class GPListFragment extends Fragment implements
                     }
                 });
     }
+
+    private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+            int realPosition = position - mListView.getHeaderViewsCount();
+            final GuardianPortal portal = adapter.getItem(realPosition);
+
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(portal.getPortal_name())
+                    .setSingleChoiceItems(R.array.options_link, -1,
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    String uri = null;
+                                    switch (which) {
+                                        case 1:
+                                            uri = portal.getLink();
+                                            break;
+
+                                        case 0:
+                                            intent.setClassName("com.google.android.apps.maps",
+                                                    "com.google.android.maps.MapsActivity");
+                                        case 2:
+                                            uri = "geo:" + portal.getLat_coordinate() + ","
+                                                    + portal.getLng_coordinate() + "?q="
+                                                    + portal.getLat_coordinate() + ","
+                                                    + portal.getLng_coordinate();
+                                            break;
+                                    }
+                                    intent.setData(Uri.parse(uri));
+                                    if (intent.resolveActivity(getActivity().getPackageManager())
+                                            != null) {
+                                        startActivity(intent);
+                                    } else {
+                                        Crouton.makeText(getActivity(),
+                                                "No app available to handle",
+                                                Style.INFO).show();
+                                    }
+                                    dialog.dismiss();
+                                }
+                            })
+                    .show();
+        }
+    };
 
 }
