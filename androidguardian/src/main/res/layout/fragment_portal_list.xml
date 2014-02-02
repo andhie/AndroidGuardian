@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:animateLayoutChanges="true"
+                android:layout_height="match_parent">
+
+	<ListView
+			android:layout_width="match_parent"
+			android:fadingEdge="none"
+			android:cacheColorHint="@color/grey_e6"
+			android:padding="15dp"
+			android:divider="@null"
+			android:dividerHeight="15dp"
+			android:scrollbarStyle="outsideOverlay"
+			android:clipToPadding="false"
+			android:animateLayoutChanges="true"
+			android:drawSelectorOnTop="true"
+			android:listSelector="@drawable/card_bg_selector"
+			android:fastScrollEnabled="true"
+			android:id="@+id/list"
+			android:layout_height="match_parent"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:id="@+id/empty"
+			android:visibility="gone"
+			android:layout_height="wrap_content"/>
+
+	<android.support.v4.widget.ContentLoadingProgressBar
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			style="?android:attr/progressBarStyleLarge"
+			android:visibility="gone"
+			android:id="@+id/progress_bar"
+			android:layout_centerInParent="true"
+			android:indeterminate="true"/>
+
+</RelativeLayout>

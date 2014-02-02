@@ -2,44 +2,25 @@
 <resources>
 
     <string name="app_name">ResSGMYGuardianPortals</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_portal_list">GP.SG/MY</string>
+
     <string name="action_sort_name">Sort by Name</string>
     <string name="action_sort_owner">Sort by Owner</string>
     <string name="action_sort_age">Sort by Age</string>
     <string name="action_sort_closest">Sort by Distance</string>
-    <string name="action_download_gp">Download GP List</string>
-    <string name="action_map">Show Map</string>
-    <string name="action_refresh_location">Refresh Location</string>
-    <string name="action_reload_data">Reload Data</string>
     <string name="action_leaderboard">Leaderboard</string>
-    <string name="action_remove_captured">Remove Captured</string>
-    <string name="label_days">%1$d days</string>
-    <string name="dialog_download">Getting info from repository</string>
-    <string name="dialog_download_page">Downloading page %1$d</string>
-    <string name="dialog_loading">Loading local copy</string>
-    <string name="dialog_remind_download">It\'s been a day since your last download. Your data could be outdated.</string>
-    <string name="warn_limit">%1$s before next allowed download</string>
-    <string name="label_no_location">Looking for location</string>
-    <string name="label_location_found">Got it! %1$s, %2$s</string>
-    <string name="label_last_update">Last updated: %1$s</string>
-    <string name="label_item_count">%1$d items</string>
-    <string name="bttn_download">Download</string>
-    <string name="bttn_nevermind">Later</string>
-    <plurals name="labe_hour">
-        <item quantity="one">%d hr before next allowed download</item>
-        <item quantity="other">%d hrs before next allowed download</item>
-    </plurals>
-    <plurals name="labe_min">
-        <item quantity="one">%d min before next allowed download</item>
-        <item quantity="other">%d mins before next allowed download</item>
-    </plurals>
 
-    <string-array name="options_link">
-        <item>Google Map</item>
-        <item>Ingress Intel</item>
-        <item>Other…</item>
-    </string-array>
+    <string name="day">Day</string>
+	<string name="sort">Sort</string>
+
+	<string name="header_nearby">Nearby</string>
+	<string name="header_age">Age</string>
+	<string name="header_name">Portal Name</string>
+	<string name="header_owner">Owner Name</string>
+
+	<string name="new_data">New data available. Touch to refresh</string>
+
+
+
 
 </resources>
