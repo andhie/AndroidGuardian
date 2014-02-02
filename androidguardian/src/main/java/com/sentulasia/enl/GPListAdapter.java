@@ -1,7 +1,7 @@
-package com.virtualmanila.guardianportallister.sgmy;
+package com.sentulasia.enl;
 
-import com.virtualmanila.guardianportallister.sgmy.model.GuardianPortal;
-import com.virtualmanila.guardianportallister.sgmy.widget.PortalCard;
+import com.sentulasia.enl.model.GuardianPortal;
+import com.sentulasia.enl.widget.PortalCard;
 
 import android.content.Context;
 import android.view.View;

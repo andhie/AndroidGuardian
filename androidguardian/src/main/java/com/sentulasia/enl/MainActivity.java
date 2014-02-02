@@ -1,6 +1,6 @@
-package com.virtualmanila.guardianportallister.sgmy;
+package com.sentulasia.enl;
 
-import com.virtualmanila.guardianportallister.sgmy.service.GetGPListService;
+import com.sentulasia.enl.service.GetGPListService;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

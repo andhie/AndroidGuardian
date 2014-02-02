@@ -1,7 +1,7 @@
-package com.virtualmanila.guardianportallister.sgmy;
+package com.sentulasia.enl;
 
 import com.koushikdutta.ion.Ion;
-import com.virtualmanila.guardianportallister.sgmy.util.Util;
+import com.sentulasia.enl.util.Util;
 
 import android.app.Application;
 

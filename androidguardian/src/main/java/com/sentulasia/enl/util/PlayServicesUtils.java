@@ -1,4 +1,4 @@
-package com.virtualmanila.guardianportallister.sgmy.util;
+package com.sentulasia.enl.util;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;

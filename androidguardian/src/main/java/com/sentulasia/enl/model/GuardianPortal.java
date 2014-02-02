@@ -1,8 +1,8 @@
-package com.virtualmanila.guardianportallister.sgmy.model;
+package com.sentulasia.enl.model;
 
 import com.google.gson.Gson;
 
-import com.virtualmanila.guardianportallister.sgmy.util.Util;
+import com.sentulasia.enl.util.Util;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">ResSGMYGuardianPortals</string>
+	<string name="app_name">Smurf Tears</string>
 	<string name="title_activity_portal_list">GP.SG/MY</string>
 	<string name="action_sort_name">Sort by Name</string>
 	<string name="action_sort_owner">Sort by Owner</string>

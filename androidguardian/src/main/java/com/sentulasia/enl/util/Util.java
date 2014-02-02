@@ -1,4 +1,4 @@
-package com.virtualmanila.guardianportallister.sgmy.util;
+package com.sentulasia.enl.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

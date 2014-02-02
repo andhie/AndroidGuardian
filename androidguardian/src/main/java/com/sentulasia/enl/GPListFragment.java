@@ -1,4 +1,4 @@
-package com.virtualmanila.guardianportallister.sgmy;
+package com.sentulasia.enl;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -10,11 +10,11 @@ import com.google.gson.JsonObject;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.virtualmanila.guardianportallister.sgmy.model.GuardianPortal;
-import com.virtualmanila.guardianportallister.sgmy.util.Events;
-import com.virtualmanila.guardianportallister.sgmy.util.FileUtil;
-import com.virtualmanila.guardianportallister.sgmy.util.PlayServicesUtils;
-import com.virtualmanila.guardianportallister.sgmy.util.PortalSorter;
+import com.sentulasia.enl.model.GuardianPortal;
+import com.sentulasia.enl.util.Events;
+import com.sentulasia.enl.util.FileUtil;
+import com.sentulasia.enl.util.PlayServicesUtils;
+import com.sentulasia.enl.util.PortalSorter;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,6 +1,6 @@
-package com.virtualmanila.guardianportallister.sgmy.util;
+package com.sentulasia.enl.util;
 
-import com.virtualmanila.guardianportallister.sgmy.model.GuardianPortal;
+import com.sentulasia.enl.model.GuardianPortal;
 
 import java.util.List;
 

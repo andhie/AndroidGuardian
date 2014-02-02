@@ -1,11 +1,11 @@
-package com.virtualmanila.guardianportallister.sgmy.service;
+package com.sentulasia.enl.service;
 
 import com.google.gson.reflect.TypeToken;
 
 import com.koushikdutta.ion.Ion;
-import com.virtualmanila.guardianportallister.sgmy.model.GuardianPortal;
-import com.virtualmanila.guardianportallister.sgmy.util.Events;
-import com.virtualmanila.guardianportallister.sgmy.util.FileUtil;
+import com.sentulasia.enl.model.GuardianPortal;
+import com.sentulasia.enl.util.Events;
+import com.sentulasia.enl.util.FileUtil;
 
 import android.app.IntentService;
 import android.content.Context;
