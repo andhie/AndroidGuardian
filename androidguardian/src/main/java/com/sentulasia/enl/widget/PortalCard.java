@@ -6,6 +6,8 @@ import com.sentulasia.enl.util.Util;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,17 +60,35 @@ public class PortalCard extends LinearLayout {
         mAge = (TextView) v.findViewById(R.id.age);
     }
 
+    private SpannableStringBuilder ssb;
+
     public void setData(GuardianPortal portal) {
         mPortalName.setText(portal.getPortal_name());
         mPortalLocation.setText(portal.getLocation());
         mOwner.setText(portal.getAgent_name());
-        mMatureDate.setText(portal.printGuardianMilestone());
         mAge.setText(String.valueOf(portal.getPortalAge()));
 
-        if(portal.isLive()) {
+        if (portal.isLive()) {
+            mMatureDate.setText(portal.printGuardianMilestone());
             mMatureDate.setTextColor(Color.BLACK);
         } else {
-            mMatureDate.setTextColor(getContext().getResources().getColor(R.color.text_green_enlightened));
+
+            if (ssb == null) {
+                ssb = new SpannableStringBuilder();
+            }
+
+            String destroyer = portal.getDestroyed_by();
+
+            ssb.clear();
+            ssb.append("Tears collected by ").append(destroyer);
+            ssb.setSpan(new ForegroundColorSpan(
+                    getResources().getColor(R.color.text_green_enlightened)),
+                    ssb.length() - destroyer.length(),
+                    ssb.length(),
+                    SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+
+            mMatureDate.setText(ssb);
             Util.setStrikeThru(mAge);
             Util.setStrikeThru(mOwner);
         }

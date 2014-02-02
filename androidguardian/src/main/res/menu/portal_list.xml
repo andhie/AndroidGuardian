@@ -60,10 +60,10 @@
 	<!--android:orderInCategory="100"-->
 	<!--android:showAsAction="never"-->
 	<!--android:title="@string/action_reload_data"/>-->
-	<!--<item-->
-	<!--android:id="@+id/action_leaderboard"-->
-	<!--android:orderInCategory="100"-->
-	<!--android:showAsAction="never"-->
-	<!--android:title="@string/action_leaderboard"/>-->
+	<item
+			android:id="@+id/action_leaderboard"
+			android:orderInCategory="100"
+			android:showAsAction="never"
+			android:title="@string/action_leaderboard"/>
 
 </menu>

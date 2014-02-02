@@ -11,16 +11,18 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.sentulasia.enl.model.GuardianPortal;
+import com.sentulasia.enl.model.ScorePair;
 import com.sentulasia.enl.util.Events;
 import com.sentulasia.enl.util.FileUtil;
+import com.sentulasia.enl.util.LoadFromFileTask;
 import com.sentulasia.enl.util.PlayServicesUtils;
 import com.sentulasia.enl.util.PortalSorter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -37,7 +39,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -197,9 +198,9 @@ public class GPListFragment extends Fragment implements
                 sortList(PortalSorter.SortType.DISTANCE);
                 return true;
 
-//            case R.id.action_leaderboard:
-//                showLeaderBoard();
-//                return true;
+            case R.id.action_leaderboard:
+                showLeaderBoard();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -231,7 +232,7 @@ public class GPListFragment extends Fragment implements
     private String currentAddress;
 
     public void onEventMainThread(Events.onAddressResolved event) {
-        if (PortalSorter.SortType.DISTANCE == sortCriteria.getSortType()) {
+        if (sortCriteria != null && PortalSorter.SortType.DISTANCE == sortCriteria.getSortType()) {
             mHeaderSubtitle.setVisibility(View.VISIBLE);
         } else {
             mHeaderSubtitle.setVisibility(View.GONE);
@@ -305,8 +306,24 @@ public class GPListFragment extends Fragment implements
 
     }
 
+    private void showLeaderBoard() {
+        List<ScorePair> list = FileUtil.getLeaderboardList(getActivity());
+        CharSequence[] seqs = new CharSequence[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            ScorePair sp = list.get(i);
+            seqs[i] = sp.getScore() + " - [" + sp.getName() + "]";
+        }
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.action_leaderboard)
+                .setNeutralButton(android.R.string.ok, null)
+                .setItems(seqs, null)
+                .show();
+    }
+
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
+
         if (position == 0) {
             loadTask = new LoadFromFileTask(getActivity(), FileUtil.LIVE_PORTAL_FILE);
         } else {
@@ -383,34 +400,12 @@ public class GPListFragment extends Fragment implements
                                 String address = result.get("formatted_address").getAsString();
 
                                 EventBus.getDefault()
-                                        .postSticky(new Events.onAddressResolved(address));
+                                        .post(new Events.onAddressResolved(address));
                             }
                         }
 
                     }
                 });
-    }
-
-    private class LoadFromFileTask extends AsyncTask<Void, Void, List<GuardianPortal>> {
-
-        private WeakReference<Activity> ref;
-
-        private String filename;
-
-        public LoadFromFileTask(Activity activity, String filename) {
-            ref = new WeakReference<Activity>(activity);
-            this.filename = filename;
-        }
-
-        @Override
-        protected List<GuardianPortal> doInBackground(Void... voids) {
-            return FileUtil.getPortalList(ref.get(), filename);
-        }
-
-        @Override
-        protected void onPostExecute(List<GuardianPortal> list) {
-            EventBus.getDefault().post(new Events.onLoadFromFileEvent(list));
-        }
     }
 
 }

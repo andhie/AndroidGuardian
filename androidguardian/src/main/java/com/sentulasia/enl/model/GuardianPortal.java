@@ -53,6 +53,8 @@ public class GuardianPortal {
 
     private DateTime updated_at;
 
+    private boolean isLive;
+
     public int getAge_points() {
         return age_points;
     }
@@ -137,17 +139,22 @@ public class GuardianPortal {
         return updated_at;
     }
 
+    public void setIsLive(boolean isLive) {
+        this.isLive = isLive;
+    }
+
     public boolean isLive() {
-        return "Live".equalsIgnoreCase(status_string);
+        return isLive;
     }
 
     public int getPortalAge() {
-        if (isLive()) {
+        if (isLive) {
             DateTime now = DateTime.now();
-            return Days.daysBetween(captured_date.toLocalDate(), now.toLocalDate()).getDays();
+            return Days.daysBetween(captured_date, now).getDays();
+            
         } else {
-            return Days.daysBetween(captured_date.toLocalDate(), destruction_date.toLocalDate())
-                    .getDays();
+            return Days.daysBetween(captured_date, destruction_date).getDays();
+
         }
     }
 
@@ -155,7 +162,7 @@ public class GuardianPortal {
         StringBuilder sb = new StringBuilder();
 
         DateTime temp;
-        if (isLive()) {
+        if (isLive) {
             sb.append("Destroy before:");
             int age = getPortalAge();
             if (age < 3) {

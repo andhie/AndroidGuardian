@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import com.sentulasia.enl.model.GuardianPortal;
+import com.sentulasia.enl.model.ScorePair;
 
 import android.content.Context;
 import android.util.Log;
@@ -27,6 +28,8 @@ public class FileUtil {
 
     public static final String DEAD_PORTAL_FILE = "dead.txt";
 
+    public static final String LEADERBOARD_FILE = "leaderboard.txt";
+
 
     public static void savePortalList(Context context, List<GuardianPortal> list, String filename) {
         Gson gson = Util.getGson();
@@ -43,6 +46,26 @@ public class FileUtil {
 
         if (list == null) {
             return Collections.<GuardianPortal>emptyList();
+        } else {
+            return list;
+        }
+    }
+
+    public static void saveLeaderboardList(Context context, List<ScorePair> list) {
+        Gson gson = Util.getGson();
+        writeToFile(context, LEADERBOARD_FILE, gson.toJson(list));
+    }
+
+    public static List<ScorePair> getLeaderboardList(Context context) {
+        String data = readFromFile(context, LEADERBOARD_FILE);
+
+        Gson gson = new Gson();
+        ArrayList<ScorePair> list = gson
+                .fromJson(data, new TypeToken<ArrayList<ScorePair>>() {
+                }.getType());
+
+        if (list == null) {
+            return Collections.<ScorePair>emptyList();
         } else {
             return list;
         }
