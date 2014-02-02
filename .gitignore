@@ -10,9 +10,8 @@ lint.xml
 .checkstyle
 
 #IntelliJ IDEA
-.idea
-*.iml
-*.ipr
+/.idea/workspace.xml
+/.idea/libraries
 *.iws
 out
 classes
