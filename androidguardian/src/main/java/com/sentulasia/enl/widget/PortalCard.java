@@ -5,6 +5,7 @@ import com.sentulasia.enl.model.GuardianPortal;
 import com.sentulasia.enl.util.Util;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,15 @@ public class PortalCard extends LinearLayout {
         mPortalName.setText(portal.getPortal_name());
         mPortalLocation.setText(portal.getLocation());
         mOwner.setText(portal.getAgent_name());
-        mMatureDate.setText("Destroy before " + portal.printGuardianMilestone());
+        mMatureDate.setText(portal.printGuardianMilestone());
         mAge.setText(String.valueOf(portal.getPortalAge()));
+
+        if(portal.isLive()) {
+            mMatureDate.setTextColor(Color.BLACK);
+        } else {
+            mMatureDate.setTextColor(getContext().getResources().getColor(R.color.text_green_enlightened));
+            Util.setStrikeThru(mAge);
+            Util.setStrikeThru(mOwner);
+        }
     }
 }

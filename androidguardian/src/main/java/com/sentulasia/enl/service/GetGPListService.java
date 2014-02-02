@@ -53,7 +53,7 @@ public class GetGPListService extends IntentService {
         FileUtil.savePortalList(getApplicationContext(), liveList, FileUtil.LIVE_PORTAL_FILE);
         FileUtil.savePortalList(getApplicationContext(), deadList, FileUtil.DEAD_PORTAL_FILE);
 
-        EventBus.getDefault().post(new Events.OnPullServerListEvent(liveList));
+        EventBus.getDefault().post(new Events.OnPullServerListEvent(liveList, deadList));
 
         liveList = null;
         deadList = null;

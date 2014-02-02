@@ -8,7 +8,9 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.TypedValue;
+import android.widget.TextView;
 
 public class Util {
 
@@ -26,5 +28,9 @@ public class Util {
     public static String printPrettyDate(DateTime dt) {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy");
         return dt.toString(fmt);
+    }
+
+    public static void setStrikeThru(TextView textView) {
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 }

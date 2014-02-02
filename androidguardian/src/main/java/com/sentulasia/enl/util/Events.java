@@ -13,13 +13,21 @@ public class Events {
 
         private List<GuardianPortal> liveList;
 
-        public OnPullServerListEvent(List<GuardianPortal> list) {
-            liveList = list;
+        private List<GuardianPortal> deadList;
+
+        public OnPullServerListEvent(List<GuardianPortal> liveList, List<GuardianPortal> deadList) {
+            this.liveList = liveList;
+            this.deadList = deadList;
         }
 
         public List<GuardianPortal> getLiveList() {
             return liveList;
         }
+
+        public List<GuardianPortal> getDeadList() {
+            return deadList;
+        }
+
     }
 
     public static class onLoadFromFileEvent {

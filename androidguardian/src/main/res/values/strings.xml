@@ -15,5 +15,9 @@
 	<string name="header_name">Portal Name</string>
 	<string name="header_owner">Owner Name</string>
 	<string name="new_data">New data available.\nTouch this to refresh</string>
+	<array name="ab_nav_array">
+		<item>Wanted List</item>
+		<item>R.I.P List</item>
+	</array>
 
 </resources>

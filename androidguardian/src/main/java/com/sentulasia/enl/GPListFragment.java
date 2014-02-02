@@ -24,6 +24,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -46,7 +49,8 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class GPListFragment extends Fragment implements
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,
+        ActionBar.OnNavigationListener {
 
     public static Fragment newInstance() {
         return new GPListFragment();
@@ -75,6 +79,9 @@ public class GPListFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
+        initActionBar();
+
         View v = inflater.inflate(R.layout.fragment_portal_list, container, false);
 
         mListView = (ListView) v.findViewById(R.id.list);
@@ -92,9 +99,6 @@ public class GPListFragment extends Fragment implements
         EventBus.getDefault().register(this);
         setHasOptionsMenu(true);
 
-        loadTask = new LoadFromFileTask(getActivity());
-        loadTask.execute();
-
         mLocationClient = new LocationClient(getActivity(), this, this);
 
         mLocationRequest = LocationRequest.create();
@@ -102,6 +106,21 @@ public class GPListFragment extends Fragment implements
         mLocationRequest.setNumUpdates(1);
 
         return v;
+    }
+
+    private void initActionBar() {
+
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
+        actionBar.setListNavigationCallbacks(new ArrayAdapter<String>(
+                actionBar.getThemedContext(),
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                getResources().getStringArray(R.array.ab_nav_array)
+        ), this);
+
     }
 
     public void onStart() {
@@ -135,7 +154,6 @@ public class GPListFragment extends Fragment implements
         switch (requestCode) {
             case CONNECTION_FAILURE_RESOLUTION_REQUEST:
                 if (resultCode == Activity.RESULT_OK) {
-                    mLocationClient.requestLocationUpdates(mLocationRequest, this);
                     mLocationClient.connect();
                 }
 
@@ -187,14 +205,21 @@ public class GPListFragment extends Fragment implements
         return super.onOptionsItemSelected(item);
     }
 
-    public void onEventMainThread(Events.OnPullServerListEvent event) {
-        final List<GuardianPortal> list = event.getLiveList();
+    public void onEventMainThread(final Events.OnPullServerListEvent event) {
 
         final Crouton crouton = Crouton
                 .makeText(getActivity(), getString(R.string.new_data), Style.INFO);
         crouton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int idx = getActionBar().getSelectedNavigationIndex();
+                List<GuardianPortal> list;
+
+                if (idx == 0) {
+                    list = event.getLiveList();
+                } else {
+                    list = event.getDeadList();
+                }
                 populateAdapter(list);
                 crouton.hide();
             }
@@ -223,7 +248,10 @@ public class GPListFragment extends Fragment implements
 
     private void populateAdapter(List<GuardianPortal> list) {
 
-        mProgressBar.hide();
+        if (list.isEmpty() && adapter == null) {
+            mProgressBar.show();
+            return;
+        }
 
         adapter = new GPListAdapter(getActivity(), list);
         mListView.setAdapter(adapter);
@@ -234,6 +262,8 @@ public class GPListFragment extends Fragment implements
         }
 
         sortList(sortCriteria.getSortType());
+
+        mProgressBar.hide();
 
     }
 
@@ -276,6 +306,20 @@ public class GPListFragment extends Fragment implements
     }
 
     @Override
+    public boolean onNavigationItemSelected(int position, long id) {
+        if (position == 0) {
+            loadTask = new LoadFromFileTask(getActivity(), FileUtil.LIVE_PORTAL_FILE);
+        } else {
+            loadTask = new LoadFromFileTask(getActivity(), FileUtil.DEAD_PORTAL_FILE);
+        }
+
+        mProgressBar.show();
+        loadTask.execute();
+
+        return true;
+    }
+
+    @Override
     public void onConnected(Bundle connectionHint) {
         mCurrentLocation = mLocationClient.getLastLocation();
         mLocationClient.requestLocationUpdates(mLocationRequest, this);
@@ -309,6 +353,10 @@ public class GPListFragment extends Fragment implements
         } else {
             PlayServicesUtils.getErrorDialog(result.getErrorCode(), getActivity(), 0);
         }
+    }
+
+    private ActionBar getActionBar() {
+        return ((ActionBarActivity) getActivity()).getSupportActionBar();
     }
 
     private void getAddress() {
@@ -347,13 +395,16 @@ public class GPListFragment extends Fragment implements
 
         private WeakReference<Activity> ref;
 
-        public LoadFromFileTask(Activity activity) {
+        private String filename;
+
+        public LoadFromFileTask(Activity activity, String filename) {
             ref = new WeakReference<Activity>(activity);
+            this.filename = filename;
         }
 
         @Override
         protected List<GuardianPortal> doInBackground(Void... voids) {
-            return FileUtil.getPortalList(ref.get(), FileUtil.LIVE_PORTAL_FILE);
+            return FileUtil.getPortalList(ref.get(), filename);
         }
 
         @Override

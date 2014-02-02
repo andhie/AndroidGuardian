@@ -6,12 +6,12 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
 	<application
-			android:name=".MyApplication"
+			android:name="com.sentulasia.enl.MyApplication"
 			android:allowBackup="false"
 			android:icon="@drawable/ic_launcher"
 			android:label="@string/app_name"
 			android:theme="@style/AppTheme">
-		<activity android:name=".MainActivity">
+		<activity android:name="com.sentulasia.enl.MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
@@ -20,7 +20,7 @@
 		</activity>
 
 		<service
-				android:name=".service.GetGPListService"
+				android:name="com.sentulasia.enl.service.GetGPListService"
 				android:exported="false"/>
 
 		<meta-data

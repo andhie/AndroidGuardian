@@ -156,6 +156,7 @@ public class GuardianPortal {
 
         DateTime temp;
         if (isLive()) {
+            sb.append("Destroy before:");
             int age = getPortalAge();
             if (age < 3) {
                 temp = captured_date.plusDays(3);
@@ -182,6 +183,8 @@ public class GuardianPortal {
                 sb.append("YOU HAVE FAILED");
             }
 
+        } else {
+            sb.append("Destroy by ").append(destroyed_by);
         }
         return sb.toString();
     }
