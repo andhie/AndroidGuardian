@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ResSGMYGuardianPortals</string>
-    <string name="title_activity_portal_list">GP.SG/MY</string>
-
-    <string name="action_sort_name">Sort by Name</string>
-    <string name="action_sort_owner">Sort by Owner</string>
-    <string name="action_sort_age">Sort by Age</string>
-    <string name="action_sort_closest">Sort by Distance</string>
-    <string name="action_leaderboard">Leaderboard</string>
-
-    <string name="day">Day</string>
+	<string name="app_name">ResSGMYGuardianPortals</string>
+	<string name="title_activity_portal_list">GP.SG/MY</string>
+	<string name="action_sort_name">Sort by Name</string>
+	<string name="action_sort_owner">Sort by Owner</string>
+	<string name="action_sort_age">Sort by Age</string>
+	<string name="action_sort_distance">Sort by Distance</string>
+	<string name="action_leaderboard">Leaderboard</string>
+	<string name="day">Day</string>
 	<string name="sort">Sort</string>
-
 	<string name="header_nearby">Nearby</string>
 	<string name="header_age">Age</string>
 	<string name="header_name">Portal Name</string>
 	<string name="header_owner">Owner Name</string>
-
-	<string name="new_data">New data available. Touch to refresh</string>
-
-
-
+	<string name="new_data">New data available.\nTouch this to refresh</string>
 
 </resources>

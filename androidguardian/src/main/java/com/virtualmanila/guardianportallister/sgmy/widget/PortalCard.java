@@ -1,8 +1,8 @@
 package com.virtualmanila.guardianportallister.sgmy.widget;
 
 import com.virtualmanila.guardianportallister.sgmy.R;
-import com.virtualmanila.guardianportallister.sgmy.util.Util;
 import com.virtualmanila.guardianportallister.sgmy.model.GuardianPortal;
+import com.virtualmanila.guardianportallister.sgmy.util.Util;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -61,7 +61,7 @@ public class PortalCard extends LinearLayout {
         mPortalName.setText(portal.getPortal_name());
         mPortalLocation.setText(portal.getLocation());
         mOwner.setText(portal.getAgent_name());
-        mMatureDate.setText("Destroy before " + Util.printPrettyDate(portal.getDay_of_150()));
+        mMatureDate.setText("Destroy before " + portal.printGuardianMilestone());
         mAge.setText(String.valueOf(portal.getPortalAge()));
     }
 }

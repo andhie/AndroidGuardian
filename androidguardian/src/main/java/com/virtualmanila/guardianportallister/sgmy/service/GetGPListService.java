@@ -3,9 +3,9 @@ package com.virtualmanila.guardianportallister.sgmy.service;
 import com.google.gson.reflect.TypeToken;
 
 import com.koushikdutta.ion.Ion;
+import com.virtualmanila.guardianportallister.sgmy.model.GuardianPortal;
 import com.virtualmanila.guardianportallister.sgmy.util.Events;
 import com.virtualmanila.guardianportallister.sgmy.util.FileUtil;
-import com.virtualmanila.guardianportallister.sgmy.model.GuardianPortal;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -70,16 +70,6 @@ public class GetGPListService extends IntentService {
                     .as(new TypeToken<ArrayList<GuardianPortal>>() {
                     })
                     .get();
-//
-//            String string = Ion.with(getApplicationContext(), url)
-//                    .asString()
-//                    .get();
-//
-//            Log.i("service", "result = " + string);
-//
-//            Gson gson = Util.getGson();
-//            List<GuardianPortal> list = gson.fromJson(string, new TypeToken<ArrayList<GuardianPortal>>() {
-//            }.getType());
 
             if (list.isEmpty()) {
                 return false;
@@ -87,7 +77,7 @@ public class GetGPListService extends IntentService {
 
             int count = list.size() - 1;
             for (int i = count; i >= 0; i--) {
-                GuardianPortal portal = list.remove(i);
+                GuardianPortal portal = list.get(i);
 
                 if (portal.isLive()) {
                     liveList.add(portal);

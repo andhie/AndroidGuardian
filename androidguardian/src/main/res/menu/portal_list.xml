@@ -35,11 +35,11 @@
 					android:showAsAction="never"
 					android:title="@string/action_sort_owner"/>
 
-			<!--<item-->
-					<!--android:id="@+id/action_sort_closest"-->
-					<!--android:orderInCategory="100"-->
-					<!--android:showAsAction="never"-->
-					<!--android:title="@string/action_sort_closest"/>-->
+			<item
+					android:id="@+id/action_sort_distance"
+					android:orderInCategory="100"
+					android:showAsAction="never"
+					android:title="@string/action_sort_distance"/>
 		</menu>
 	</item>
 

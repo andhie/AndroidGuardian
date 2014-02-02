@@ -23,6 +23,7 @@ public class Events {
     }
 
     public static class onLoadFromFileEvent {
+
         private List<GuardianPortal> list;
 
         public onLoadFromFileEvent(List<GuardianPortal> list) {
@@ -31,6 +32,20 @@ public class Events {
 
         public List<GuardianPortal> getList() {
             return list;
+        }
+
+    }
+
+    public static class onAddressResolved {
+
+        private String address;
+
+        public onAddressResolved(String address) {
+            this.address = address;
+        }
+
+        public String getAddress() {
+            return address;
         }
 
     }

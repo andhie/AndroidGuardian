@@ -24,7 +24,7 @@ public class Util {
     }
 
     public static String printPrettyDate(DateTime dt) {
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy hh:mma");
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy");
         return dt.toString(fmt);
     }
 }

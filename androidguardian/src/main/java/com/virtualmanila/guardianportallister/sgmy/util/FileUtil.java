@@ -85,8 +85,6 @@ public class FileUtil {
 
     private static void writeToFile(Context context, String filename, String json) {
 
-
-
         FileOutputStream outputStream;
 
         try {

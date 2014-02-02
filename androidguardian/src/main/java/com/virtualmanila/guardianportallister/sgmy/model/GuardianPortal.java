@@ -7,6 +7,8 @@ import com.virtualmanila.guardianportallister.sgmy.util.Util;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
+import android.location.Location;
+
 public class GuardianPortal {
 
     private int age_points;
@@ -31,11 +33,11 @@ public class GuardianPortal {
 
     private int id;
 
-    private String lat_coordinate;
+    private double lat_coordinate;
 
     private String link;
 
-    private String lng_coordinate;
+    private double lng_coordinate;
 
     private String location;
 
@@ -95,7 +97,7 @@ public class GuardianPortal {
         return id;
     }
 
-    public String getLat_coordinate() {
+    public double getLat_coordinate() {
         return lat_coordinate;
     }
 
@@ -103,7 +105,7 @@ public class GuardianPortal {
         return link;
     }
 
-    public String getLng_coordinate() {
+    public double getLng_coordinate() {
         return lng_coordinate;
     }
 
@@ -147,6 +149,53 @@ public class GuardianPortal {
             return Days.daysBetween(captured_date.toLocalDate(), destruction_date.toLocalDate())
                     .getDays();
         }
+    }
+
+    public String printGuardianMilestone() {
+        StringBuilder sb = new StringBuilder();
+
+        DateTime temp;
+        if (isLive()) {
+            int age = getPortalAge();
+            if (age < 3) {
+                temp = captured_date.plusDays(3);
+                sb.append("\nDay 3: ").append(Util.printPrettyDate(temp));
+            }
+            if (age < 10) {
+                temp = captured_date.plusDays(10);
+                sb.append("\nDay 10: ").append(Util.printPrettyDate(temp));
+            }
+            if (age < 20) {
+                temp = captured_date.plusDays(20);
+                sb.append("\nDay 20: ").append(Util.printPrettyDate(temp));
+            }
+            if (age < 90) {
+                temp = captured_date.plusDays(90);
+                sb.append("\nDay 90: ").append(Util.printPrettyDate(temp));
+            }
+            if (age < 150) {
+                temp = captured_date.plusDays(150);
+                sb.append("\nDay 150: ").append(Util.printPrettyDate(temp));
+            }
+
+            if (age > 150) {
+                sb.append("YOU HAVE FAILED");
+            }
+
+        }
+        return sb.toString();
+    }
+
+    private Location portalLoc;
+
+    public double getPortalDistance(Location myLocation) {
+        if (portalLoc == null) {
+            portalLoc = new Location("intel");
+            portalLoc.setLatitude(lat_coordinate);
+            portalLoc.setLongitude(lng_coordinate);
+        }
+
+        return myLocation.distanceTo(portalLoc);
     }
 
     public static GuardianPortal fromJson(String json) {
