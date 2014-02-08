@@ -11,51 +11,64 @@ public class Events {
 
     public static class OnPullServerListEvent {
 
-        private List<GuardianPortal> liveList;
+	private List<GuardianPortal> liveList;
 
-        private List<GuardianPortal> deadList;
+	private List<GuardianPortal> deadList;
 
-        public OnPullServerListEvent(List<GuardianPortal> liveList, List<GuardianPortal> deadList) {
-            this.liveList = liveList;
-            this.deadList = deadList;
-        }
+	public OnPullServerListEvent(List<GuardianPortal> liveList, List<GuardianPortal> deadList) {
+	    this.liveList = liveList;
+	    this.deadList = deadList;
+	}
 
-        public List<GuardianPortal> getLiveList() {
-            return liveList;
-        }
+	public List<GuardianPortal> getLiveList() {
+	    return liveList;
+	}
 
-        public List<GuardianPortal> getDeadList() {
-            return deadList;
-        }
+	public List<GuardianPortal> getDeadList() {
+	    return deadList;
+	}
 
     }
 
     public static class onLoadFromFileEvent {
 
-        private List<GuardianPortal> list;
+	private List<GuardianPortal> list;
 
-        public onLoadFromFileEvent(List<GuardianPortal> list) {
-            this.list = list;
-        }
+	public onLoadFromFileEvent(List<GuardianPortal> list) {
+	    this.list = list;
+	}
 
-        public List<GuardianPortal> getList() {
-            return list;
-        }
+	public List<GuardianPortal> getList() {
+	    return list;
+	}
 
     }
 
     public static class onAddressResolved {
 
-        private String address;
+	private String address;
 
-        public onAddressResolved(String address) {
-            this.address = address;
-        }
+	public onAddressResolved(String address) {
+	    this.address = address;
+	}
 
-        public String getAddress() {
-            return address;
-        }
+	public String getAddress() {
+	    return address;
+	}
 
     }
 
+    public static class onRequestPortalDetail {
+
+	private GuardianPortal portal;
+
+	public onRequestPortalDetail(GuardianPortal portal) {
+	    this.portal = portal;
+	}
+
+	public GuardianPortal getPortal() {
+	    return portal;
+	}
+
+    }
 }

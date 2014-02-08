@@ -30,6 +30,7 @@ public class GetGPListService extends IntentService {
 
     public static void execute(Context context) {
         Log.i("service", "executing get portal list");
+	context = context.getApplicationContext();
         Intent intent = new Intent(context, GetGPListService.class);
         context.startService(intent);
     }

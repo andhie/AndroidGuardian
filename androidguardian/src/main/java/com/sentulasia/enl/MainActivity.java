@@ -13,10 +13,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GetGPListService.execute(this);
-
         if (savedInstanceState == null) {
-            Fragment fragment = GPListFragment.newInstance();
+
+	    GetGPListService.execute(this);
+
+	    Fragment fragment = GPListFragment.newInstance();
 
             getSupportFragmentManager()
                     .beginTransaction()

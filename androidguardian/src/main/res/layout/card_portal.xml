@@ -13,22 +13,18 @@
 			android:layout_width="match_parent"
 			android:id="@+id/portal_name"
 			font:typeface="roboto_bold"
-			android:textSize="20sp"
+			android:textSize="22sp"
 			android:textColor="@color/grey_70"
-			android:ellipsize="end"
 			tools:text="Calvary Assembly of God"
-			android:maxLines="3"
 			android:layout_height="wrap_content"/>
 
 	<com.devspark.robototextview.widget.RobotoTextView
 			android:layout_width="match_parent"
-			android:textSize="12sp"
+			android:textSize="14sp"
 			android:id="@+id/portal_location"
 			android:textColor="@color/grey_b2"
-			android:ellipsize="end"
 			tools:text="482 Upper East Coast Road, Singapore 466519"
 			font:typeface="roboto_regular"
-			android:maxLines="2"
 			android:layout_height="wrap_content"/>
 
 	<View
@@ -52,6 +48,7 @@
 			<com.devspark.robototextview.widget.RobotoTextView
 					android:layout_width="wrap_content"
 					android:id="@+id/owner"
+					android:textSize="15sp"
 					font:typeface="roboto_regular"
 					android:textColor="@color/text_blue_resistance"
 					tools:text="@FuzzyPillow"
@@ -61,7 +58,7 @@
 					android:layout_width="wrap_content"
 					android:id="@+id/mature_date"
 					font:typeface="roboto_regular"
-					android:textSize="14sp"
+					android:textSize="15sp"
 					tools:text="Mature on May 18 2013 at 1:46pm"
 					android:layout_height="wrap_content"/>
 

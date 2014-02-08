@@ -19,6 +19,8 @@
 			</intent-filter>
 		</activity>
 
+		<activity android:name=".PortalDetailActivity"/>
+
 		<service
 				android:name="com.sentulasia.enl.service.GetGPListService"
 				android:exported="false"/>

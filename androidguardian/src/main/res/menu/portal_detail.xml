@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:abc="http://schemas.android.com/apk/res-auto">
+
+	<item
+			android:id="@+id/action_share"
+			android:title="Share Link"
+			abc:showAsAction="always"
+			abc:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
+
+	<item
+			android:id="@+id/action_navigate"
+			android:orderInCategory="101"
+			android:showAsAction="always"
+			android:title="@string/action_navigate"/>
+
+
+</menu>

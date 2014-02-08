@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:font="http://schemas.android.com/apk/res-auto"
+            android:layout_height="match_parent">
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:orientation="vertical"
+			android:layout_height="wrap_content">
+
+		<com.sentulasia.enl.widget.ScaleImageView
+				android:layout_width="match_parent"
+				android:minHeight="200dp"
+				app:ratio="0.5625"
+				android:id="@+id/image"
+				android:src="@drawable/ingress_icon"
+				android:layout_height="wrap_content"/>
+
+		<com.devspark.robototextview.widget.RobotoTextView
+				android:layout_width="wrap_content"
+				android:text="Overview"
+				android:layout_marginTop="15dp"
+				android:textSize="24sp"
+				android:layout_marginLeft="15dp"
+				android:layout_marginRight="15dp"
+				font:typeface="roboto_light_italic"
+				android:textColor="@color/grey_33"
+				android:layout_height="wrap_content"/>
+
+		<com.sentulasia.enl.widget.PortalCard
+				android:layout_width="match_parent"
+				android:id="@+id/portal_card"
+				android:layout_margin="15dp"
+				android:layout_height="wrap_content"/>
+
+
+		<com.devspark.robototextview.widget.RobotoTextView
+				android:layout_width="wrap_content"
+				android:text="Notes"
+				android:textSize="24sp"
+				android:layout_marginLeft="15dp"
+				android:layout_marginRight="15dp"
+				font:typeface="roboto_light_italic"
+				android:textColor="@color/grey_33"
+				android:layout_height="wrap_content"/>
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_margin="15dp"
+				android:orientation="vertical"
+				android:padding="15dp"
+				android:background="@drawable/card_bg"
+				android:layout_height="wrap_content">
+
+			<com.devspark.robototextview.widget.RobotoTextView
+					android:layout_width="wrap_content"
+					tools:text="Last Updated on 3 Feb 2014"
+					android:id="@+id/last_updated"
+					font:typeface="roboto_regular"
+					android:textSize="15sp"
+					android:layout_height="wrap_content"/>
+
+			<com.devspark.robototextview.widget.RobotoTextView
+					android:layout_width="wrap_content"
+					tools:text="Points for tears collection: 1 point"
+					android:id="@+id/points"
+					android:textSize="15sp"
+					font:typeface="roboto_regular"
+					android:layout_height="wrap_content"/>
+
+			<com.devspark.robototextview.widget.RobotoTextView
+					android:layout_width="wrap_content"
+					tools:text="Bonus Points: N/A"
+					android:id="@+id/bonus_points"
+					font:typeface="roboto_regular"
+					android:textSize="15sp"
+					android:layout_height="wrap_content"/>
+
+			<com.devspark.robototextview.widget.RobotoTextView
+					android:layout_width="wrap_content"
+					tools:text="Bonus Details: N/A"
+					android:textSize="15sp"
+					android:id="@+id/bonus_detail"
+					font:typeface="roboto_regular"
+					android:layout_height="wrap_content"/>
+
+
+			<com.devspark.robototextview.widget.RobotoTextView
+					android:layout_width="wrap_content"
+					android:layout_marginTop="16dp"
+					tools:text="Notes: N/A"
+					android:id="@+id/notes"
+					android:textSize="15sp"
+					font:typeface="roboto_regular"
+					android:layout_height="wrap_content"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</ScrollView>
