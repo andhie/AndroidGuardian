@@ -10,7 +10,7 @@
 	<item
 			android:id="@+id/action_navigate"
 			android:orderInCategory="101"
-			android:showAsAction="always"
+			abc:showAsAction="never"
 			android:title="@string/action_navigate"/>
 
 

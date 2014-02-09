@@ -19,10 +19,19 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".PortalDetailActivity"/>
+		<activity
+				android:name=".PortalDetailActivity"
+				android:parentActivityName=".MainActivity">
+			<meta-data
+					android:name="android.support.PARENT_ACTIVITY"
+					android:value=".MainActivity"/>
+		</activity>
 
 		<service
 				android:name="com.sentulasia.enl.service.GetGPListService"
+				android:exported="false"/>
+		<service
+				android:name="com.sentulasia.enl.service.GetHashListService"
 				android:exported="false"/>
 
 		<meta-data

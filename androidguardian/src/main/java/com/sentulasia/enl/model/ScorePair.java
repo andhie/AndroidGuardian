@@ -7,20 +7,20 @@ public class ScorePair implements Comparable<ScorePair> {
     int score;
 
     public ScorePair(String name, int score) {
-        this.name = name;
-        this.score = score;
+	this.name = name;
+	this.score = score;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public int getScore() {
-        return score;
+	return score;
     }
 
     @Override
     public int compareTo(ScorePair another) {
-        return -Integer.valueOf(score).compareTo(another.score);
+	return -Integer.valueOf(score).compareTo(another.score);
     }
 }

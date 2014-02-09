@@ -14,6 +14,8 @@ import android.graphics.Paint;
 import android.util.TypedValue;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
 public class Util {
 
     public static Gson getGson() {
@@ -57,4 +59,21 @@ public class Util {
 	    return 0;
 	}
     }
+
+    public static boolean shouldUpdateData(Context context) {
+	long last = PrefUtil.getLastUpdateTime(context);
+	if (last < 0) {
+	    return true;
+	}
+
+	long diff = System.currentTimeMillis() - last;
+	long day = TimeUnit.MILLISECONDS.toDays(diff);
+	if (day > 0) {
+	    return true;
+	} else {
+	    return false;
+	}
+
+    }
+
 }

@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
+import de.keyboardsurfer.android.widget.crouton.Configuration;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
@@ -172,7 +173,9 @@ public class GPListFragment extends Fragment implements
 	inflater.inflate(R.menu.portal_list, menu);
 
 	mSortDistanceMenu = menu.findItem(R.id.action_sort_distance);
-	mSortDistanceMenu.setVisible(false);
+	if (mCurrentLocation == null) {
+	    mSortDistanceMenu.setVisible(false);
+	}
 
 	super.onCreateOptionsMenu(menu, inflater);
     }
@@ -208,32 +211,42 @@ public class GPListFragment extends Fragment implements
 	return super.onOptionsItemSelected(item);
     }
 
-    public void onEventMainThread(final Events.OnPullServerListEvent event) {
+    public void onEventMainThread(Events.OnNewLivePortalListEvent event) {
+	int idx = getActionBar().getSelectedNavigationIndex();
 
-	final Crouton crouton = Crouton
-		.makeText(getActivity(), getString(R.string.new_data), Style.INFO);
-	crouton.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View view) {
-		int idx = getActionBar().getSelectedNavigationIndex();
-		List<GuardianPortal> list;
-
-		if (idx == 0) {
-		    list = event.getLiveList();
-		} else {
-		    list = event.getDeadList();
-		}
-		populateAdapter(list);
-		crouton.hide();
+	if (idx == 0) {
+	    if (adapter == null || adapter.isEmpty()) {
+		populateAdapter(event.getList());
+	    } else {
+		notifyNewData(event.getList());
 	    }
-	});
-	crouton.show();
+	}
 
+    }
+
+    public void onEventMainThread(Events.OnNewDeadPortalListEvent event) {
+	int idx = getActionBar().getSelectedNavigationIndex();
+
+	if (idx == 1) {
+	    if (adapter == null || adapter.isEmpty()) {
+		populateAdapter(event.getList());
+	    } else {
+		notifyNewData(event.getList());
+	    }
+	}
+
+    }
+
+    public void onEventMainThread(Events.OnNoNewPortalData event) {
+	Crouton.makeText(getActivity(),
+		"No new " + event.getPortalDataType() + " Portal updates",
+		Style.INFO)
+		.show();
     }
 
     private String currentAddress;
 
-    public void onEventMainThread(Events.onAddressResolved event) {
+    public void onEventMainThread(Events.OnAddressResolved event) {
 	if (sortCriteria != null && PortalSorter.SortType.DISTANCE == sortCriteria.getSortType()) {
 	    mHeaderSubtitle.setVisibility(View.VISIBLE);
 	} else {
@@ -243,8 +256,30 @@ public class GPListFragment extends Fragment implements
 	currentAddress = event.getAddress();
     }
 
-    public void onEventMainThread(Events.onLoadFromFileEvent event) {
+    public void onEventMainThread(Events.OnLoadFromFileEvent event) {
 	populateAdapter(event.getList());
+    }
+
+    public void notifyNewData(final List<GuardianPortal> list) {
+	Configuration config = new Configuration.Builder()
+		.setDuration(10000)
+		.build();
+
+	Style style = new Style.Builder()
+		.setBackgroundColorValue(Style.holoBlueLight)
+		.setConfiguration(config).build();
+
+	final Crouton crouton = Crouton
+		.makeText(getActivity(), getString(R.string.new_data), style);
+
+	crouton.setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View view) {
+		populateAdapter(list);
+		crouton.hide();
+	    }
+	});
+	crouton.show();
     }
 
     private GPListAdapter adapter;
@@ -402,7 +437,7 @@ public class GPListFragment extends Fragment implements
 				String address = result.get("formatted_address").getAsString();
 
 				EventBus.getDefault()
-					.post(new Events.onAddressResolved(address));
+					.post(new Events.OnAddressResolved(address));
 			    }
 			}
 

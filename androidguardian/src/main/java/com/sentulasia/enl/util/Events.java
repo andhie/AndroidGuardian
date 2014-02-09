@@ -9,32 +9,11 @@ import java.util.List;
  */
 public class Events {
 
-    public static class OnPullServerListEvent {
-
-	private List<GuardianPortal> liveList;
-
-	private List<GuardianPortal> deadList;
-
-	public OnPullServerListEvent(List<GuardianPortal> liveList, List<GuardianPortal> deadList) {
-	    this.liveList = liveList;
-	    this.deadList = deadList;
-	}
-
-	public List<GuardianPortal> getLiveList() {
-	    return liveList;
-	}
-
-	public List<GuardianPortal> getDeadList() {
-	    return deadList;
-	}
-
-    }
-
-    public static class onLoadFromFileEvent {
+    public static class OnNewLivePortalListEvent {
 
 	private List<GuardianPortal> list;
 
-	public onLoadFromFileEvent(List<GuardianPortal> list) {
+	public OnNewLivePortalListEvent(List<GuardianPortal> list) {
 	    this.list = list;
 	}
 
@@ -44,11 +23,52 @@ public class Events {
 
     }
 
-    public static class onAddressResolved {
+    public static class OnNewDeadPortalListEvent {
+
+	private List<GuardianPortal> list;
+
+	public OnNewDeadPortalListEvent(List<GuardianPortal> list) {
+	    this.list = list;
+	}
+
+	public List<GuardianPortal> getList() {
+	    return list;
+	}
+
+    }
+
+    public static class OnNoNewPortalData {
+
+	private String type;
+
+	public OnNoNewPortalData(String type) {
+	    this.type = type;
+	}
+
+	public String getPortalDataType() {
+	    return type;
+	}
+    }
+
+    public static class OnLoadFromFileEvent {
+
+	private List<GuardianPortal> list;
+
+	public OnLoadFromFileEvent(List<GuardianPortal> list) {
+	    this.list = list;
+	}
+
+	public List<GuardianPortal> getList() {
+	    return list;
+	}
+
+    }
+
+    public static class OnAddressResolved {
 
 	private String address;
 
-	public onAddressResolved(String address) {
+	public OnAddressResolved(String address) {
 	    this.address = address;
 	}
 

@@ -12,7 +12,7 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
-        super.onCreate();
-        Ion.getDefault(getApplicationContext()).configure().setGson(Util.getGson());
+	super.onCreate();
+	Ion.getDefault(getApplicationContext()).configure().setGson(Util.getGson());
     }
 }

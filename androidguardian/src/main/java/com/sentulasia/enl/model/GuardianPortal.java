@@ -56,166 +56,166 @@ public class GuardianPortal {
     private boolean isLive;
 
     public int getAge_points() {
-        return age_points;
+	return age_points;
     }
 
     public String getAgent_name() {
-        return agent_name;
+	return agent_name;
     }
 
     public String getBonus_details() {
-        return bonus_details;
+	return bonus_details;
     }
 
     public String getBonus_points() {
-        return bonus_points;
+	return bonus_points;
     }
 
     public DateTime getCaptured_date() {
-        return captured_date;
+	return captured_date;
     }
 
     public String getCity() {
-        return city;
+	return city;
     }
 
     public DateTime getCreated_at() {
-        return created_at;
+	return created_at;
     }
 
     public DateTime getDay_of_150() {
-        return day_of_150;
+	return day_of_150;
     }
 
     public String getDestroyed_by() {
-        return destroyed_by;
+	return destroyed_by;
     }
 
     public DateTime getDestruction_date() {
-        return destruction_date;
+	return destruction_date;
     }
 
     public int getId() {
-        return id;
+	return id;
     }
 
     public double getLat_coordinate() {
-        return lat_coordinate;
+	return lat_coordinate;
     }
 
     public String getLink() {
-        return link;
+	return link;
     }
 
     public double getLng_coordinate() {
-        return lng_coordinate;
+	return lng_coordinate;
     }
 
     public String getLocation() {
-        return location;
+	return location;
     }
 
     public String getNote() {
-        return note;
+	return note;
     }
 
     public String getPortal_guid() {
-        return portal_guid;
+	return portal_guid;
     }
 
     public String getPortal_name() {
-        return portal_name;
+	return portal_name;
     }
 
     public String getStatus_string() {
-        return status_string;
+	return status_string;
     }
 
     public int getTotal_points() {
-        return total_points;
+	return total_points;
     }
 
     public DateTime getUpdated_at() {
-        return updated_at;
+	return updated_at;
     }
 
     public void setIsLive(boolean isLive) {
-        this.isLive = isLive;
+	this.isLive = isLive;
     }
 
     public boolean isLive() {
-        return isLive;
+	return isLive;
     }
 
     public int getPortalAge() {
-        if (isLive) {
-            DateTime now = DateTime.now();
-            return Days.daysBetween(captured_date, now).getDays();
+	if (isLive) {
+	    DateTime now = DateTime.now();
+	    return Days.daysBetween(captured_date, now).getDays();
 
-        } else {
-            return Days.daysBetween(captured_date, destruction_date).getDays();
+	} else {
+	    return Days.daysBetween(captured_date, destruction_date).getDays();
 
-        }
+	}
     }
 
     public String printGuardianMilestone() {
-        StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
-        DateTime temp;
-        if (isLive) {
-            sb.append("Destroy before:");
-            int age = getPortalAge();
-            if (age < 3) {
-                temp = captured_date.plusDays(3);
-                sb.append("\nDay 3: ").append(Util.printPrettyDate(temp));
-            }
-            if (age < 10) {
-                temp = captured_date.plusDays(10);
-                sb.append("\nDay 10: ").append(Util.printPrettyDate(temp));
-            }
-            if (age < 20) {
-                temp = captured_date.plusDays(20);
-                sb.append("\nDay 20: ").append(Util.printPrettyDate(temp));
-            }
-            if (age < 90) {
-                temp = captured_date.plusDays(90);
-                sb.append("\nDay 90: ").append(Util.printPrettyDate(temp));
-            }
-            if (age < 150) {
-                temp = captured_date.plusDays(150);
-                sb.append("\nDay 150: ").append(Util.printPrettyDate(temp));
-            }
+	DateTime temp;
+	if (isLive) {
+	    sb.append("Destroy before:");
+	    int age = getPortalAge();
+	    if (age < 3) {
+		temp = captured_date.plusDays(3);
+		sb.append("\nDay 3: ").append(Util.printPrettyDate(temp));
+	    }
+	    if (age < 10) {
+		temp = captured_date.plusDays(10);
+		sb.append("\nDay 10: ").append(Util.printPrettyDate(temp));
+	    }
+	    if (age < 20) {
+		temp = captured_date.plusDays(20);
+		sb.append("\nDay 20: ").append(Util.printPrettyDate(temp));
+	    }
+	    if (age < 90) {
+		temp = captured_date.plusDays(90);
+		sb.append("\nDay 90: ").append(Util.printPrettyDate(temp));
+	    }
+	    if (age < 150) {
+		temp = captured_date.plusDays(150);
+		sb.append("\nDay 150: ").append(Util.printPrettyDate(temp));
+	    }
 
-            if (age > 150) {
-                sb.append("YOU HAVE FAILED");
-            }
+	    if (age > 150) {
+		sb.append("YOU HAVE FAILED");
+	    }
 
-        } else {
-            sb.append("Destroy by ").append(destroyed_by);
-        }
-        return sb.toString();
+	} else {
+	    sb.append("Destroy by ").append(destroyed_by);
+	}
+	return sb.toString();
     }
 
     private Location portalLoc;
 
     public double getPortalDistance(Location myLocation) {
-        if (portalLoc == null) {
-            portalLoc = new Location("intel");
-            portalLoc.setLatitude(lat_coordinate);
-            portalLoc.setLongitude(lng_coordinate);
-        }
+	if (portalLoc == null) {
+	    portalLoc = new Location("intel");
+	    portalLoc.setLatitude(lat_coordinate);
+	    portalLoc.setLongitude(lng_coordinate);
+	}
 
-        return myLocation.distanceTo(portalLoc);
+	return myLocation.distanceTo(portalLoc);
     }
 
     public static GuardianPortal fromJson(String json) {
-        Gson gson = Util.getGson();
-        return gson.fromJson(json, GuardianPortal.class);
+	Gson gson = Util.getGson();
+	return gson.fromJson(json, GuardianPortal.class);
     }
 
     @Override
     public String toString() {
-        Gson gson = Util.getGson();
-        return gson.toJson(this);
+	Gson gson = Util.getGson();
+	return gson.toJson(this);
     }
 }

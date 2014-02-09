@@ -10,28 +10,28 @@ import android.content.DialogInterface;
 public class PlayServicesUtils {
 
     public static boolean checkGooglePlaySevices(Activity activity) {
-        int errorCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
-        switch (errorCode) {
-            case ConnectionResult.SUCCESS:
-                return true;
-            case ConnectionResult.SERVICE_DISABLED:
-            case ConnectionResult.SERVICE_INVALID:
-            case ConnectionResult.SERVICE_MISSING:
-            case ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED:
-                getErrorDialog(errorCode, activity, 0).show();
-        }
-        return false;
+	int errorCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
+	switch (errorCode) {
+	    case ConnectionResult.SUCCESS:
+		return true;
+	    case ConnectionResult.SERVICE_DISABLED:
+	    case ConnectionResult.SERVICE_INVALID:
+	    case ConnectionResult.SERVICE_MISSING:
+	    case ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED:
+		getErrorDialog(errorCode, activity, 0).show();
+	}
+	return false;
     }
 
     public static Dialog getErrorDialog(int errorCode, final Activity activity, int requestCode) {
-        Dialog dialog = GooglePlayServicesUtil.getErrorDialog(errorCode, activity, requestCode);
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                activity.finish();
-            }
-        });
+	Dialog dialog = GooglePlayServicesUtil.getErrorDialog(errorCode, activity, requestCode);
+	dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+	    @Override
+	    public void onCancel(DialogInterface dialogInterface) {
+		activity.finish();
+	    }
+	});
 
-        return dialog;
+	return dialog;
     }
 }
