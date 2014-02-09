@@ -7,16 +7,29 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.1"
     }
-    buildTypes {
-        release {
-            runProguard false
-            proguardFiles 'proguard-rules.txt'
-            getDefaultProguardFile('proguard-android-optimize.txt')
+
+    signingConfigs {
+        releaseConfig {
+            storeFile file("REPLACE_PATH_TO_RELEASE_KEYSTORE")
+            storePassword "REPLACE_KEYSTORE_PASSWORD"
+            keyAlias "REPLACE_KEY_ALIAS"
+            keyPassword "REPLACE_KEY_PASSWORD"
         }
     }
+
+    buildTypes {
+        release {
+            zipAlign true
+            runProguard true
+            proguardFiles 'proguard-rules.txt'
+            getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+
 }
 
 dependencies {

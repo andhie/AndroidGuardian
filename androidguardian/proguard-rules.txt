@@ -15,3 +15,45 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn org.joda.time.**
+
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature,SourceFile,LineNumberTable
+
+-keep class com.koushikdutta.** { *; }
+-keep public class * extends android.support.v4.Fragment
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.* { *; }
+
+# Add any classes the interact with gson
+-keep class com.sentulasia.enl.model.* { *; }
+
+-assumenosideeffects class android.util.Log {
+    public static *** e(...);
+    public static *** w(...);
+    public static *** wtf(...);
+    public static *** d(...);
+    public static *** v(...);
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+
+# Required for EventBus
+-keepclassmembers class ** {
+public void onEvent*(**);
+}
+
