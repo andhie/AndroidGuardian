@@ -87,7 +87,15 @@ public class PortalDetailFragment extends Fragment {
 	    MenuItem shareItem = menu.findItem(R.id.action_share);
 	    ShareActionProvider shareProvider = (ShareActionProvider) MenuItemCompat
 		    .getActionProvider(shareItem);
+
+	    //workaround due to ProGuard broke it even when keep
+	    if (shareProvider == null) {
+		shareProvider = new ShareActionProvider(getActionBar().getThemedContext());
+		MenuItemCompat.setActionProvider(shareItem, shareProvider);
+	    }
+
 	    shareProvider.setShareIntent(getShareIntent());
+
 	}
 	super.onCreateOptionsMenu(menu, inflater);
     }
