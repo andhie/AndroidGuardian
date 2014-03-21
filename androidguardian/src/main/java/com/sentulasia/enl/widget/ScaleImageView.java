@@ -113,8 +113,10 @@ public class ScaleImageView extends ImageView {
 	} else if (heightMode == MeasureSpec.EXACTLY || heightMode == MeasureSpec.AT_MOST) {
 	    scaleToWidth = false;
 	} else {
-	    throw new IllegalStateException(
-		    "width or height needs to be set to match_parent or a specific dimension");
+	    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	    return;
+//	    throw new IllegalStateException(
+//		    "width or height needs to be set to match_parent or a specific dimension");
 	}
 
 	if (getDrawable() == null || getDrawable().getIntrinsicWidth() == 0) {
