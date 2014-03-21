@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.ion.Ion;
 import com.sentulasia.enl.model.GPPageHash;
 import com.sentulasia.enl.util.Events;
+import com.sentulasia.enl.util.PrefUtil;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -17,7 +18,6 @@ import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import de.greenrobot.event.EventBus;
 
@@ -89,11 +89,8 @@ public class GetHashListService extends IntentService {
 		totalPage = item.getTotal_pages();
 		array.append(currentPage, item.getHash());
 
-	    } catch (InterruptedException e) {
-		e.printStackTrace();
-	    } catch (ExecutionException e) {
-		e.printStackTrace();
 	    } catch (Exception e) {
+		PrefUtil.setLastUpdateTime(this, -1L);
 		e.printStackTrace();
 	    }
 
