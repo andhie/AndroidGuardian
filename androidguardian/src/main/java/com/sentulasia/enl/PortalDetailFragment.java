@@ -7,6 +7,7 @@ import com.sentulasia.enl.util.Events;
 import com.sentulasia.enl.util.Util;
 import com.sentulasia.enl.widget.PortalCard;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,10 +15,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import de.greenrobot.event.EventBus;
@@ -85,13 +83,12 @@ public class PortalDetailFragment extends Fragment {
         inflater.inflate(R.menu.portal_detail, menu);
         if (mPortal != null) {
             MenuItem shareItem = menu.findItem(R.id.action_share);
-            ShareActionProvider shareProvider = (ShareActionProvider) MenuItemCompat
-                    .getActionProvider(shareItem);
+            ShareActionProvider shareProvider = (ShareActionProvider) shareItem.getActionProvider();
 
             //workaround due to ProGuard broke it even when keep
             if (shareProvider == null) {
                 shareProvider = new ShareActionProvider(getActionBar().getThemedContext());
-                MenuItemCompat.setActionProvider(shareItem, shareProvider);
+                shareItem.setActionProvider(shareProvider);
             }
 
             shareProvider.setShareIntent(getShareIntent());
@@ -188,7 +185,7 @@ public class PortalDetailFragment extends Fragment {
     }
 
     private ActionBar getActionBar() {
-        return ((ActionBarActivity) getActivity()).getSupportActionBar();
+        return getActivity().getActionBar();
     }
 
     private void displayMapChooser() {

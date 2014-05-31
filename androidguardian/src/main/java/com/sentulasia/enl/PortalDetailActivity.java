@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
-public class PortalDetailActivity extends ActionBarActivity {
+public class PortalDetailActivity extends FragmentActivity {
 
     public static void show(Context context) {
         Intent intent = new Intent(context, PortalDetailActivity.class);
@@ -20,7 +20,7 @@ public class PortalDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
             Fragment fragment = PortalDetailFragment.newInstance();

@@ -18,6 +18,7 @@ import com.sentulasia.enl.util.LoadFromFileTask;
 import com.sentulasia.enl.util.PlayServicesUtils;
 import com.sentulasia.enl.util.PortalSorter;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -26,8 +27,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -413,7 +412,7 @@ public class GPListFragment extends Fragment implements
     }
 
     private ActionBar getActionBar() {
-        return ((ActionBarActivity) getActivity()).getSupportActionBar();
+        return getActivity().getActionBar();
     }
 
     private void getAddress() {
