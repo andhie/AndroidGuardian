@@ -2,7 +2,7 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -33,14 +33,14 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.google.android.gms:play-services:4.4.52'
-    compile 'com.koushikdutta.ion:ion:1.2.7'
-    compile 'com.github.johnkil.android-robototextview:robototextview:2.0.1'
+    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:appcompat-v7:19.0.1'
+    compile 'com.google.android.gms:play-services:4.1.32'
+    compile 'com.koushikdutta.ion:ion:1.2.4'
+    compile 'com.github.johnkil.android-robototextview:robototextview:2.0.0'
     compile 'joda-time:joda-time:2.3'
-    compile 'de.greenrobot:eventbus:2.2.1'
-    compile('de.keyboardsurfer.android.widget:crouton:1.8.4') {
+    compile 'de.greenrobot:eventbus:2.2.0'
+    compile('de.keyboardsurfer.android.widget:crouton:1.8.3') {
         exclude group: 'com.google.android', module: 'support-v4'
     }
 }
