@@ -80,7 +80,8 @@ public class GetHashListService extends IntentService {
             String endpoint = String.format(GP_HASH_LIST_ENDPOINT, currentPage, liveOrDead);
 
             try {
-                List<GPPageHash> temp = Ion.with(getApplicationContext(), endpoint)
+                List<GPPageHash> temp = Ion.with(getApplicationContext())
+                        .load(endpoint)
                         .as(new TypeToken<ArrayList<GPPageHash>>() {
                         })
                         .get();

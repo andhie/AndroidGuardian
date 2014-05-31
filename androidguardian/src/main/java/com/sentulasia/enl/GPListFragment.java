@@ -430,7 +430,8 @@ public class GPListFragment extends Fragment implements
                         + Locale.US, lat, lng
         );
 
-        Ion.with(getActivity(), url)
+        Ion.with(getActivity())
+                .load(url)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override

@@ -76,7 +76,8 @@ public class GetGPListService extends IntentService {
     private Object group = new Object();
 
     private void getData(String url) {
-        Ion.with(getApplicationContext(), url)
+        Ion.with(getApplicationContext())
+                .load(url)
                 .group(group)
                 .as(new TypeToken<ArrayList<GuardianPortal>>() {
                 })
