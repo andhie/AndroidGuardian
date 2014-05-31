@@ -10,6 +10,8 @@
     <string name="action_sort_distance">Sort by Distance</string>
     <string name="action_leaderboard">Leaderboard</string>
     <string name="action_navigate">Navigate</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Portal Name, Location or Owner</string>
 
 
     <!-- Used in Card -->

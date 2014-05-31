@@ -7,20 +7,24 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.Filterable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class GPListAdapter extends ArrayAdapter<GuardianPortal> implements Filterable {
 
-    List<GuardianPortal> values;
+    private List<GuardianPortal> origValues;
 
-    List<GuardianPortal> origValues;
+    private PortalFilter mFilter;
 
     public GPListAdapter(Context context, List<GuardianPortal> objects) {
         super(context, 0, objects);
-        this.values = objects;
-        this.origValues = objects;
+        this.origValues = new ArrayList<GuardianPortal>(objects);
     }
 
     @Override
@@ -40,62 +44,61 @@ public class GPListAdapter extends ArrayAdapter<GuardianPortal> implements Filte
     }
 
     @Override
-    public int getCount() {
-        return values.size();
+    public void sort(Comparator<? super GuardianPortal> comparator) {
+        super.sort(comparator);
+        Collections.sort(origValues, comparator);
     }
 
     @Override
-    public GuardianPortal getItem(int position) {
-        return values.get(position);
+    public Filter getFilter() {
+        if (mFilter == null) {
+            mFilter = new PortalFilter();
+        }
+
+        return mFilter;
     }
 
-    public List<GuardianPortal> getAll() {
-        return values;
-    }
+    private class PortalFilter extends Filter {
 
-//    @Override
-//    public Filter getFilter() {
-//
-//        Filter filter = new Filter() {
-//
-//            @SuppressWarnings("unchecked")
-//            @Override
-//            protected void publishResults(CharSequence constraint,
-//                    FilterResults results) {
-//
-//                values = (List<GuardianPortal>) results.values;
-//                notifyDataSetChanged();
-//                android.util.Log.d("ALAIN", "values = " + values.size());
-//                android.util.Log
-//                        .d("ALAIN", "origValues = " + origValues.size());
-//            }
-//
-//            @Override
-//            protected FilterResults performFiltering(CharSequence constraint) {
-//
-//                FilterResults results = new FilterResults();
-//                ArrayList<GuardianPortal> filteredArrayNames = new ArrayList<GuardianPortal>();
-//
-//                // perform your search here using the searchConstraint String.
-//                boolean filter = "true".equalsIgnoreCase(constraint.toString());
-//                android.util.Log.d("ALAIN", "constraint = " + constraint);
-//                android.util.Log.d("ALAIN", "filter = " + filter);
-//                for (int i = 0; i < origValues.size(); i++) {
-//                    GuardianPortal gp = origValues.get(i);
-//                    if (!filter || (filter && gp.isLive())) {
-//                        filteredArrayNames.add(gp);
-//                    }
-//                }
-//
-//                results.count = filteredArrayNames.size();
-//                results.values = filteredArrayNames;
-//                android.util.Log.e("VALUES", results.values.toString());
-//
-//                return results;
-//            }
-//        };
-//
-//        return filter;
-//    }
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            FilterResults results = new FilterResults();
+            List<GuardianPortal> filteredList = new ArrayList<GuardianPortal>(origValues.size());
+
+            if (constraint.length() > 0) {
+                // perform your search here using the searchConstraint String.
+                String query = constraint.toString().toUpperCase(Locale.US);
+                int size = origValues.size();
+                for (int i = 0; i < size; i++) {
+                    GuardianPortal portal = origValues.get(i);
+
+                    boolean name = portal.getPortal_name().toUpperCase(Locale.US).contains(query);
+                    boolean location = portal.getLocation().toUpperCase(Locale.US).contains(query);
+                    boolean agent = portal.getAgent_name().toUpperCase(Locale.US).contains(query);
+
+                    if (name || location || agent) {
+                        filteredList.add(portal);
+                    }
+
+                }
+            } else {
+                filteredList.addAll(origValues);
+            }
+
+            results.count = filteredList.size();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            List<GuardianPortal> filteredList = (List<GuardianPortal>) results.values;
+            clear();
+            addAll(filteredList);
+        }
+    }
 
 }

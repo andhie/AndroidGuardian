@@ -37,9 +37,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -75,6 +75,8 @@ public class GPListFragment extends Fragment implements
     private LocationRequest mLocationRequest;
 
     private Location mCurrentLocation;
+
+    private SearchView mSearchView;
 
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 1069;
 
@@ -175,6 +177,11 @@ public class GPListFragment extends Fragment implements
         if (mCurrentLocation == null) {
             mSortDistanceMenu.setVisible(false);
         }
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setOnQueryTextListener(mOnQueryTextListener);
+        mSearchView.setQueryHint(getString(R.string.search_hint));
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -340,8 +347,7 @@ public class GPListFragment extends Fragment implements
         }
 
         mHeaderTitle.setText(textResId);
-        Collections.sort(adapter.getAll(), sortCriteria);
-        adapter.notifyDataSetChanged();
+        adapter.sort(sortCriteria);
 
     }
 
@@ -452,8 +458,7 @@ public class GPListFragment extends Fragment implements
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-            int realPosition = position - mListView.getHeaderViewsCount();
-            final GuardianPortal portal = adapter.getItem(realPosition);
+            final GuardianPortal portal = (GuardianPortal) adapterView.getItemAtPosition(position);
 
             EventBus.getDefault().postSticky(new Events.onRequestPortalDetail(portal));
 
@@ -466,6 +471,23 @@ public class GPListFragment extends Fragment implements
                 PortalDetailActivity.show(getActivity());
             }
 
+        }
+    };
+
+    private SearchView.OnQueryTextListener mOnQueryTextListener
+            = new SearchView.OnQueryTextListener() {
+
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            if (adapter != null) {
+                adapter.getFilter().filter(newText);
+            }
+            return true;
         }
     };
 
