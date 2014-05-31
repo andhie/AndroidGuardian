@@ -328,14 +328,17 @@ public class GPListFragment extends Fragment implements
 
 	    case DISTANCE:
 		textResId = R.string.header_nearby;
-		if (!TextUtils.isEmpty(currentAddress)) {
-		    mHeaderSubtitle.setText(currentAddress);
-		    mHeaderSubtitle.setVisibility(View.VISIBLE);
-		}
 		sortCriteria = new PortalSorter.Distance(mCurrentLocation);
 
 		break;
 	}
+
+        if (sortType == PortalSorter.SortType.DISTANCE && !TextUtils.isEmpty(currentAddress)) {
+            mHeaderSubtitle.setText(currentAddress);
+            mHeaderSubtitle.setVisibility(View.VISIBLE);
+        } else {
+            mHeaderSubtitle.setVisibility(View.GONE);
+        }
 
 	mHeaderTitle.setText(textResId);
 	Collections.sort(adapter.getAll(), sortCriteria);
