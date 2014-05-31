@@ -32,93 +32,93 @@ public class FileUtil {
 
 
     public static void savePortalList(Context context, List<GuardianPortal> list, String filename) {
-	Gson gson = Util.getGson();
-	writeToFile(context, filename, gson.toJson(list));
+        Gson gson = Util.getGson();
+        writeToFile(context, filename, gson.toJson(list));
     }
 
     public static List<GuardianPortal> getPortalList(Context context, String filename) {
-	String data = readFromFile(context, filename);
+        String data = readFromFile(context, filename);
 
-	Gson gson = Util.getGson();
-	ArrayList<GuardianPortal> list = gson
-		.fromJson(data, new TypeToken<ArrayList<GuardianPortal>>() {
-		}.getType());
+        Gson gson = Util.getGson();
+        ArrayList<GuardianPortal> list = gson
+                .fromJson(data, new TypeToken<ArrayList<GuardianPortal>>() {
+                }.getType());
 
-	if (list == null) {
-	    return Collections.<GuardianPortal>emptyList();
-	} else {
-	    return list;
-	}
+        if (list == null) {
+            return Collections.<GuardianPortal>emptyList();
+        } else {
+            return list;
+        }
     }
 
     public static void saveLeaderboardList(Context context, List<ScorePair> list) {
-	Gson gson = Util.getGson();
-	writeToFile(context, LEADERBOARD_FILE, gson.toJson(list));
+        Gson gson = Util.getGson();
+        writeToFile(context, LEADERBOARD_FILE, gson.toJson(list));
     }
 
     public static List<ScorePair> getLeaderboardList(Context context) {
-	String data = readFromFile(context, LEADERBOARD_FILE);
+        String data = readFromFile(context, LEADERBOARD_FILE);
 
-	Gson gson = new Gson();
-	ArrayList<ScorePair> list = gson
-		.fromJson(data, new TypeToken<ArrayList<ScorePair>>() {
-		}.getType());
+        Gson gson = new Gson();
+        ArrayList<ScorePair> list = gson
+                .fromJson(data, new TypeToken<ArrayList<ScorePair>>() {
+                }.getType());
 
-	if (list == null) {
-	    return Collections.<ScorePair>emptyList();
-	} else {
-	    return list;
-	}
+        if (list == null) {
+            return Collections.<ScorePair>emptyList();
+        } else {
+            return list;
+        }
     }
 
     private static String readFromFile(Context context, String filename) {
 
-	try {
-	    InputStream inStream = context.openFileInput(filename);
+        try {
+            InputStream inStream = context.openFileInput(filename);
 
-	    if (inStream == null) {
-		return "[]";
-	    }
+            if (inStream == null) {
+                return "[]";
+            }
 
-	    InputStreamReader inReader = new InputStreamReader(inStream);
-	    BufferedReader br = new BufferedReader(inReader);
+            InputStreamReader inReader = new InputStreamReader(inStream);
+            BufferedReader br = new BufferedReader(inReader);
 
-	    String receiveString;
-	    StringBuilder stringBuilder = new StringBuilder();
+            String receiveString;
+            StringBuilder stringBuilder = new StringBuilder();
 
-	    while ((receiveString = br.readLine()) != null) {
-		stringBuilder.append(receiveString);
-	    }
+            while ((receiveString = br.readLine()) != null) {
+                stringBuilder.append(receiveString);
+            }
 
-	    inStream.close();
-	    inReader.close();
-	    br.close();
+            inStream.close();
+            inReader.close();
+            br.close();
 
-	    return stringBuilder.toString();
+            return stringBuilder.toString();
 
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	    Log.i("util", "file not found ");
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-	Log.i("util", "return empty array");
-	return "[]";
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.i("util", "file not found ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.i("util", "return empty array");
+        return "[]";
     }
 
     private static void writeToFile(Context context, String filename, String json) {
 
-	FileOutputStream outputStream;
+        FileOutputStream outputStream;
 
-	try {
-	    outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
-	    outputStream.write(json.getBytes());
-	    outputStream.close();
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+        try {
+            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(json.getBytes());
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

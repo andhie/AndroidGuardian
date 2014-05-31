@@ -50,13 +50,13 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class GPListFragment extends Fragment implements
-	GooglePlayServicesClient.ConnectionCallbacks,
-	GooglePlayServicesClient.OnConnectionFailedListener,
-	LocationListener,
-	ActionBar.OnNavigationListener {
+        GooglePlayServicesClient.ConnectionCallbacks,
+        GooglePlayServicesClient.OnConnectionFailedListener,
+        LocationListener,
+        ActionBar.OnNavigationListener {
 
     public static Fragment newInstance() {
-	return new GPListFragment();
+        return new GPListFragment();
     }
 
     private ListView mListView;
@@ -81,88 +81,88 @@ public class GPListFragment extends Fragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	    Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
 
-	initActionBar();
+        initActionBar();
 
-	View v = inflater.inflate(R.layout.fragment_portal_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_portal_list, container, false);
 
-	mListView = (ListView) v.findViewById(R.id.list);
-	mEmptyView = (TextView) v.findViewById(R.id.empty);
+        mListView = (ListView) v.findViewById(R.id.list);
+        mEmptyView = (TextView) v.findViewById(R.id.empty);
 
-	mProgressBar = (ContentLoadingProgressBar) v.findViewById(R.id.progress_bar);
-	mProgressBar.show();
+        mProgressBar = (ContentLoadingProgressBar) v.findViewById(R.id.progress_bar);
+        mProgressBar.show();
 
-	View header = inflater.inflate(R.layout.list_item_header, mListView, false);
-	mHeaderTitle = (TextView) header.findViewById(R.id.title);
-	mHeaderSubtitle = (TextView) header.findViewById(R.id.subtitle);
+        View header = inflater.inflate(R.layout.list_item_header, mListView, false);
+        mHeaderTitle = (TextView) header.findViewById(R.id.title);
+        mHeaderSubtitle = (TextView) header.findViewById(R.id.subtitle);
 
-	mListView.addHeaderView(header, null, false);
-	mListView.setOnItemClickListener(onItemClick);
+        mListView.addHeaderView(header, null, false);
+        mListView.setOnItemClickListener(onItemClick);
 
-	EventBus.getDefault().register(this);
-	setHasOptionsMenu(true);
+        EventBus.getDefault().register(this);
+        setHasOptionsMenu(true);
 
-	mLocationClient = new LocationClient(getActivity(), this, this);
+        mLocationClient = new LocationClient(getActivity(), this, this);
 
-	mLocationRequest = LocationRequest.create();
-	mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
-	mLocationRequest.setNumUpdates(1);
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
+        mLocationRequest.setNumUpdates(1);
 
-	return v;
+        return v;
     }
 
     private void initActionBar() {
 
-	final ActionBar actionBar = getActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
-	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-	actionBar.setListNavigationCallbacks(new ArrayAdapter<String>(
-		actionBar.getThemedContext(),
-		android.R.layout.simple_list_item_1,
-		android.R.id.text1,
-		getResources().getStringArray(R.array.ab_nav_array)
-	), this);
+        actionBar.setListNavigationCallbacks(new ArrayAdapter<String>(
+                actionBar.getThemedContext(),
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                getResources().getStringArray(R.array.ab_nav_array)
+        ), this);
 
     }
 
     public void onStart() {
-	super.onStart();
-	mLocationClient.connect();
+        super.onStart();
+        mLocationClient.connect();
     }
 
     @Override
     public void onStop() {
-	if (mLocationClient.isConnected()) {
-	    mLocationClient.removeLocationUpdates(this);
-	}
-	mLocationClient.disconnect();
-	super.onStop();
+        if (mLocationClient.isConnected()) {
+            mLocationClient.removeLocationUpdates(this);
+        }
+        mLocationClient.disconnect();
+        super.onStop();
     }
 
     @Override
     public void onDestroyView() {
-	EventBus.getDefault().unregister(this);
-	Crouton.clearCroutonsForActivity(getActivity());
-	if (loadTask != null) {
-	    loadTask.cancel(true);
-	}
-	super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+        Crouton.clearCroutonsForActivity(getActivity());
+        if (loadTask != null) {
+            loadTask.cancel(true);
+        }
+        super.onDestroyView();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-	super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
-	switch (requestCode) {
-	    case CONNECTION_FAILURE_RESOLUTION_REQUEST:
-		if (resultCode == Activity.RESULT_OK) {
-		    mLocationClient.connect();
-		}
+        switch (requestCode) {
+            case CONNECTION_FAILURE_RESOLUTION_REQUEST:
+                if (resultCode == Activity.RESULT_OK) {
+                    mLocationClient.connect();
+                }
 
-		break;
-	}
+                break;
+        }
 
     }
 
@@ -170,14 +170,14 @@ public class GPListFragment extends Fragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-	inflater.inflate(R.menu.portal_list, menu);
+        inflater.inflate(R.menu.portal_list, menu);
 
-	mSortDistanceMenu = menu.findItem(R.id.action_sort_distance);
-	if (mCurrentLocation == null) {
-	    mSortDistanceMenu.setVisible(false);
-	}
+        mSortDistanceMenu = menu.findItem(R.id.action_sort_distance);
+        if (mCurrentLocation == null) {
+            mSortDistanceMenu.setVisible(false);
+        }
 
-	super.onCreateOptionsMenu(menu, inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private PortalSorter.Sorter sortCriteria;
@@ -185,153 +185,153 @@ public class GPListFragment extends Fragment implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-	switch (item.getItemId()) {
+        switch (item.getItemId()) {
 
-	    case R.id.action_sort_name:
-		sortList(PortalSorter.SortType.NAME);
-		return true;
+            case R.id.action_sort_name:
+                sortList(PortalSorter.SortType.NAME);
+                return true;
 
-	    case R.id.action_sort_age:
-		sortList(PortalSorter.SortType.AGE);
-		return true;
+            case R.id.action_sort_age:
+                sortList(PortalSorter.SortType.AGE);
+                return true;
 
-	    case R.id.action_sort_owner:
-		sortList(PortalSorter.SortType.OWNER);
-		return true;
+            case R.id.action_sort_owner:
+                sortList(PortalSorter.SortType.OWNER);
+                return true;
 
-	    case R.id.action_sort_distance:
-		sortList(PortalSorter.SortType.DISTANCE);
-		return true;
+            case R.id.action_sort_distance:
+                sortList(PortalSorter.SortType.DISTANCE);
+                return true;
 
-	    case R.id.action_leaderboard:
-		showLeaderBoard();
-		return true;
-	}
+            case R.id.action_leaderboard:
+                showLeaderBoard();
+                return true;
+        }
 
-	return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     public void onEventMainThread(Events.OnNewLivePortalListEvent event) {
-	int idx = getActionBar().getSelectedNavigationIndex();
+        int idx = getActionBar().getSelectedNavigationIndex();
 
-	if (idx == 0) {
-	    if (adapter == null || adapter.isEmpty()) {
-		populateAdapter(event.getList());
-	    } else {
-		notifyNewData(event.getList());
-	    }
-	}
+        if (idx == 0) {
+            if (adapter == null || adapter.isEmpty()) {
+                populateAdapter(event.getList());
+            } else {
+                notifyNewData(event.getList());
+            }
+        }
 
     }
 
     public void onEventMainThread(Events.OnNewDeadPortalListEvent event) {
-	int idx = getActionBar().getSelectedNavigationIndex();
+        int idx = getActionBar().getSelectedNavigationIndex();
 
-	if (idx == 1) {
-	    if (adapter == null || adapter.isEmpty()) {
-		populateAdapter(event.getList());
-	    } else {
-		notifyNewData(event.getList());
-	    }
-	}
+        if (idx == 1) {
+            if (adapter == null || adapter.isEmpty()) {
+                populateAdapter(event.getList());
+            } else {
+                notifyNewData(event.getList());
+            }
+        }
 
     }
 
     public void onEventMainThread(Events.OnNoNewPortalData event) {
-	Crouton.makeText(getActivity(),
-		"No new " + event.getPortalDataType() + " Portal updates",
-		Style.INFO)
-		.show();
+        Crouton.makeText(getActivity(),
+                "No new " + event.getPortalDataType() + " Portal updates",
+                Style.INFO)
+                .show();
     }
 
     private String currentAddress;
 
     public void onEventMainThread(Events.OnAddressResolved event) {
-	if (sortCriteria != null && PortalSorter.SortType.DISTANCE == sortCriteria.getSortType()) {
-	    mHeaderSubtitle.setVisibility(View.VISIBLE);
-	} else {
-	    mHeaderSubtitle.setVisibility(View.GONE);
-	}
-	mHeaderSubtitle.setText(event.getAddress());
-	currentAddress = event.getAddress();
+        if (sortCriteria != null && PortalSorter.SortType.DISTANCE == sortCriteria.getSortType()) {
+            mHeaderSubtitle.setVisibility(View.VISIBLE);
+        } else {
+            mHeaderSubtitle.setVisibility(View.GONE);
+        }
+        mHeaderSubtitle.setText(event.getAddress());
+        currentAddress = event.getAddress();
     }
 
     public void onEventMainThread(Events.OnLoadFromFileEvent event) {
-	populateAdapter(event.getList());
+        populateAdapter(event.getList());
     }
 
     public void notifyNewData(final List<GuardianPortal> list) {
-	Configuration config = new Configuration.Builder()
-		.setDuration(10000)
-		.build();
+        Configuration config = new Configuration.Builder()
+                .setDuration(10000)
+                .build();
 
-	Style style = new Style.Builder()
-		.setBackgroundColorValue(Style.holoBlueLight)
-		.setConfiguration(config).build();
+        Style style = new Style.Builder()
+                .setBackgroundColorValue(Style.holoBlueLight)
+                .setConfiguration(config).build();
 
-	final Crouton crouton = Crouton
-		.makeText(getActivity(), getString(R.string.new_data), style);
+        final Crouton crouton = Crouton
+                .makeText(getActivity(), getString(R.string.new_data), style);
 
-	crouton.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View view) {
-		populateAdapter(list);
-		crouton.hide();
-	    }
-	});
-	crouton.show();
+        crouton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                populateAdapter(list);
+                crouton.hide();
+            }
+        });
+        crouton.show();
     }
 
     private GPListAdapter adapter;
 
     private void populateAdapter(List<GuardianPortal> list) {
 
-	if (list.isEmpty() && adapter == null) {
-	    mProgressBar.show();
-	    return;
-	}
+        if (list.isEmpty() && adapter == null) {
+            mProgressBar.show();
+            return;
+        }
 
-	adapter = new GPListAdapter(getActivity(), list);
-	mListView.setAdapter(adapter);
-	mEmptyView.setText("No Result");
+        adapter = new GPListAdapter(getActivity(), list);
+        mListView.setAdapter(adapter);
+        mEmptyView.setText("No Result");
 
-	if (sortCriteria == null) {
-	    sortCriteria = new PortalSorter.Age();
-	}
+        if (sortCriteria == null) {
+            sortCriteria = new PortalSorter.Age();
+        }
 
-	sortList(sortCriteria.getSortType());
+        sortList(sortCriteria.getSortType());
 
-	mProgressBar.hide();
+        mProgressBar.hide();
 
     }
 
     private void sortList(PortalSorter.SortType sortType) {
 
-	int textResId = R.string.header_age;
+        int textResId = R.string.header_age;
 
-	switch (sortType) {
+        switch (sortType) {
 
-	    case NAME:
-		textResId = R.string.header_name;
-		sortCriteria = new PortalSorter.Name();
-		break;
+            case NAME:
+                textResId = R.string.header_name;
+                sortCriteria = new PortalSorter.Name();
+                break;
 
-	    case AGE:
-		textResId = R.string.header_age;
-		sortCriteria = new PortalSorter.Age();
-		break;
+            case AGE:
+                textResId = R.string.header_age;
+                sortCriteria = new PortalSorter.Age();
+                break;
 
-	    case OWNER:
-		textResId = R.string.header_owner;
-		sortCriteria = new PortalSorter.Owner();
-		break;
+            case OWNER:
+                textResId = R.string.header_owner;
+                sortCriteria = new PortalSorter.Owner();
+                break;
 
-	    case DISTANCE:
-		textResId = R.string.header_nearby;
-		sortCriteria = new PortalSorter.Distance(mCurrentLocation);
+            case DISTANCE:
+                textResId = R.string.header_nearby;
+                sortCriteria = new PortalSorter.Distance(mCurrentLocation);
 
-		break;
-	}
+                break;
+        }
 
         if (sortType == PortalSorter.SortType.DISTANCE && !TextUtils.isEmpty(currentAddress)) {
             mHeaderSubtitle.setText(currentAddress);
@@ -340,133 +340,134 @@ public class GPListFragment extends Fragment implements
             mHeaderSubtitle.setVisibility(View.GONE);
         }
 
-	mHeaderTitle.setText(textResId);
-	Collections.sort(adapter.getAll(), sortCriteria);
-	adapter.notifyDataSetChanged();
+        mHeaderTitle.setText(textResId);
+        Collections.sort(adapter.getAll(), sortCriteria);
+        adapter.notifyDataSetChanged();
 
     }
 
     private void showLeaderBoard() {
-	List<ScorePair> list = FileUtil.getLeaderboardList(getActivity());
-	CharSequence[] seqs = new CharSequence[list.size()];
-	for (int i = 0; i < list.size(); i++) {
-	    ScorePair sp = list.get(i);
-	    seqs[i] = sp.getScore() + " - [" + sp.getName() + "]";
-	}
+        List<ScorePair> list = FileUtil.getLeaderboardList(getActivity());
+        CharSequence[] seqs = new CharSequence[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            ScorePair sp = list.get(i);
+            seqs[i] = sp.getScore() + " - [" + sp.getName() + "]";
+        }
 
-	new AlertDialog.Builder(getActivity())
-		.setTitle(R.string.action_leaderboard)
-		.setNeutralButton(android.R.string.ok, null)
-		.setItems(seqs, null)
-		.show();
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.action_leaderboard)
+                .setNeutralButton(android.R.string.ok, null)
+                .setItems(seqs, null)
+                .show();
     }
 
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
 
-	if (position == 0) {
-	    loadTask = new LoadFromFileTask(getActivity(), FileUtil.LIVE_PORTAL_FILE);
-	} else {
-	    loadTask = new LoadFromFileTask(getActivity(), FileUtil.DEAD_PORTAL_FILE);
-	}
+        if (position == 0) {
+            loadTask = new LoadFromFileTask(getActivity(), FileUtil.LIVE_PORTAL_FILE);
+        } else {
+            loadTask = new LoadFromFileTask(getActivity(), FileUtil.DEAD_PORTAL_FILE);
+        }
 
-	mProgressBar.show();
-	loadTask.execute();
+        mProgressBar.show();
+        loadTask.execute();
 
-	return true;
+        return true;
     }
 
     @Override
     public void onConnected(Bundle connectionHint) {
-	mCurrentLocation = mLocationClient.getLastLocation();
-	mLocationClient.requestLocationUpdates(mLocationRequest, this);
+        mCurrentLocation = mLocationClient.getLastLocation();
+        mLocationClient.requestLocationUpdates(mLocationRequest, this);
     }
 
     @Override
     public void onLocationChanged(Location location) {
-	if (location != null) {
-	    mSortDistanceMenu.setVisible(true);
-	    mCurrentLocation = location;
-	    getAddress();
-	}
+        if (location != null) {
+            mSortDistanceMenu.setVisible(true);
+            mCurrentLocation = location;
+            getAddress();
+        }
     }
 
     @Override
     public void onDisconnected() {
-	//do nothing
+        //do nothing
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-	if (result.hasResolution()) {
-	    try {
-		result.startResolutionForResult(
-			getActivity(),
-			CONNECTION_FAILURE_RESOLUTION_REQUEST);
+        if (result.hasResolution()) {
+            try {
+                result.startResolutionForResult(
+                        getActivity(),
+                        CONNECTION_FAILURE_RESOLUTION_REQUEST);
 
-	    } catch (IntentSender.SendIntentException e) {
-		e.printStackTrace();
-	    }
-	} else {
-	    PlayServicesUtils.getErrorDialog(result.getErrorCode(), getActivity(), 0);
-	}
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            PlayServicesUtils.getErrorDialog(result.getErrorCode(), getActivity(), 0);
+        }
     }
 
     private ActionBar getActionBar() {
-	return ((ActionBarActivity) getActivity()).getSupportActionBar();
+        return ((ActionBarActivity) getActivity()).getSupportActionBar();
     }
 
     private void getAddress() {
-	double lat = mCurrentLocation.getLatitude();
-	double lng = mCurrentLocation.getLongitude();
+        double lat = mCurrentLocation.getLatitude();
+        double lng = mCurrentLocation.getLongitude();
 
-	String url = String.format(Locale.ENGLISH,
-		"http://maps.googleapis.com/maps/api/geocode/json?latlng=%1$f,%2$f&sensor=true&language="
-			+ Locale.US, lat, lng);
+        String url = String.format(Locale.ENGLISH,
+                "http://maps.googleapis.com/maps/api/geocode/json?latlng=%1$f,%2$f&sensor=true&language="
+                        + Locale.US, lat, lng
+        );
 
-	Ion.with(getActivity(), url)
-		.asJsonObject()
-		.setCallback(new FutureCallback<JsonObject>() {
-		    @Override
-		    public void onCompleted(Exception e, JsonObject jsonObject) {
-			if (e != null) {
-			    return;
-			}
+        Ion.with(getActivity(), url)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject jsonObject) {
+                        if (e != null) {
+                            return;
+                        }
 
-			if ("OK".equalsIgnoreCase(jsonObject.get("status").getAsString())) {
-			    JsonArray resultArray = jsonObject.getAsJsonArray("results");
-			    if (resultArray.size() > 0) {
-				JsonObject result = resultArray.get(0).getAsJsonObject();
-				String address = result.get("formatted_address").getAsString();
+                        if ("OK".equalsIgnoreCase(jsonObject.get("status").getAsString())) {
+                            JsonArray resultArray = jsonObject.getAsJsonArray("results");
+                            if (resultArray.size() > 0) {
+                                JsonObject result = resultArray.get(0).getAsJsonObject();
+                                String address = result.get("formatted_address").getAsString();
 
-				EventBus.getDefault()
-					.post(new Events.OnAddressResolved(address));
-			    }
-			}
+                                EventBus.getDefault()
+                                        .post(new Events.OnAddressResolved(address));
+                            }
+                        }
 
-		    }
-		});
+                    }
+                });
     }
 
     private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
-	@Override
-	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-	    int realPosition = position - mListView.getHeaderViewsCount();
-	    final GuardianPortal portal = adapter.getItem(realPosition);
+            int realPosition = position - mListView.getHeaderViewsCount();
+            final GuardianPortal portal = adapter.getItem(realPosition);
 
-	    EventBus.getDefault().postSticky(new Events.onRequestPortalDetail(portal));
+            EventBus.getDefault().postSticky(new Events.onRequestPortalDetail(portal));
 
-	    if (getResources().getBoolean(R.bool.isMultiPane)) {
-		getActivity().getSupportFragmentManager()
-			.beginTransaction()
-			.replace(R.id.detail_frame, PortalDetailFragment.newInstance())
-			.commit();
-	    } else {
-		PortalDetailActivity.show(getActivity());
-	    }
+            if (getResources().getBoolean(R.bool.isMultiPane)) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.detail_frame, PortalDetailFragment.newInstance())
+                        .commit();
+            } else {
+                PortalDetailActivity.show(getActivity());
+            }
 
-	}
+        }
     };
 
 }

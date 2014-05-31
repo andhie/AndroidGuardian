@@ -5,18 +5,18 @@
               tools:context=".MainActivity"
               android:layout_height="match_parent">
 
-	<FrameLayout
-			android:layout_width="0dp"
-			android:layout_weight="1"
-			android:id="@+id/content_frame"
-			android:layout_height="match_parent"
-			/>
+    <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/content_frame"
+            android:layout_height="match_parent"
+            />
 
-	<FrameLayout
-			android:layout_width="0dp"
-			android:layout_weight="1"
-			android:id="@+id/detail_frame"
-			android:layout_height="match_parent"
-			/>
+    <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/detail_frame"
+            android:layout_height="match_parent"
+            />
 
 </LinearLayout>

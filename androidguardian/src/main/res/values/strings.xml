@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Smurf Tears</string>
+    <string name="app_name">Smurf Tears</string>
 
-	<!-- Used in menu -->
-	<string name="action_sort_name">Sort by Name</string>
-	<string name="action_sort_owner">Sort by Owner</string>
-	<string name="action_sort_age">Sort by Age</string>
-	<string name="action_sort_distance">Sort by Distance</string>
-	<string name="action_leaderboard">Leaderboard</string>
-	<string name="action_navigate">Navigate</string>
+    <!-- Used in menu -->
+    <string name="action_sort_name">Sort by Name</string>
+    <string name="action_sort_owner">Sort by Owner</string>
+    <string name="action_sort_age">Sort by Age</string>
+    <string name="action_sort_distance">Sort by Distance</string>
+    <string name="action_leaderboard">Leaderboard</string>
+    <string name="action_navigate">Navigate</string>
 
 
-	<!-- Used in Card -->
-	<string name="day">Day</string>
-	<string name="sort">Sort</string>
+    <!-- Used in Card -->
+    <string name="day">Day</string>
+    <string name="sort">Sort</string>
 
-	<!-- Used in card listview -->
-	<string name="header_nearby">Nearby</string>
-	<string name="header_age">Age</string>
-	<string name="header_name">Portal Name</string>
-	<string name="header_owner">Owner Name</string>
-	<string name="new_data">New data available.\nTouch this to refresh</string>
+    <!-- Used in card listview -->
+    <string name="header_nearby">Nearby</string>
+    <string name="header_age">Age</string>
+    <string name="header_name">Portal Name</string>
+    <string name="header_owner">Owner Name</string>
+    <string name="new_data">New data available.\nTouch this to refresh</string>
 
-	<array name="ab_nav_array">
-		<item>Wanted List</item>
-		<item>R.I.P List</item>
-	</array>
+    <array name="ab_nav_array">
+        <item>Wanted List</item>
+        <item>R.I.P List</item>
+    </array>
 
-	<string-array name="options_link">
-		<item>Google Map</item>
-		<item>Ingress Intel</item>
-		<item>Other…</item>
-	</string-array>
+    <string-array name="options_link">
+        <item>Google Map</item>
+        <item>Ingress Intel</item>
+        <item>Other…</item>
+    </string-array>
 
-	<bool name="isMultiPane">false</bool>
+    <bool name="isMultiPane">false</bool>
 
 </resources>

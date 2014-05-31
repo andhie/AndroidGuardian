@@ -17,17 +17,17 @@ public class LoadFromFileTask extends AsyncTask<Void, Void, List<GuardianPortal>
     private String filename;
 
     public LoadFromFileTask(Activity activity, String filename) {
-	ref = new WeakReference<Activity>(activity);
-	this.filename = filename;
+        ref = new WeakReference<Activity>(activity);
+        this.filename = filename;
     }
 
     @Override
     protected List<GuardianPortal> doInBackground(Void... voids) {
-	return FileUtil.getPortalList(ref.get(), filename);
+        return FileUtil.getPortalList(ref.get(), filename);
     }
 
     @Override
     protected void onPostExecute(List<GuardianPortal> list) {
-	EventBus.getDefault().post(new Events.OnLoadFromFileEvent(list));
+        EventBus.getDefault().post(new Events.OnLoadFromFileEvent(list));
     }
 }

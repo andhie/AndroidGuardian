@@ -9,88 +9,88 @@
        xmlns:tools="http://schemas.android.com/tools"
        android:layout_height="match_parent">
 
-	<com.devspark.robototextview.widget.RobotoTextView
-			android:layout_width="match_parent"
-			android:id="@+id/portal_name"
-			font:typeface="roboto_bold"
-			android:textSize="22sp"
-			android:textColor="@color/grey_70"
-			tools:text="Calvary Assembly of God"
-			android:layout_height="wrap_content"/>
+    <com.devspark.robototextview.widget.RobotoTextView
+            android:layout_width="match_parent"
+            android:id="@+id/portal_name"
+            font:typeface="roboto_bold"
+            android:textSize="22sp"
+            android:textColor="@color/grey_70"
+            tools:text="Calvary Assembly of God"
+            android:layout_height="wrap_content"/>
 
-	<com.devspark.robototextview.widget.RobotoTextView
-			android:layout_width="match_parent"
-			android:textSize="14sp"
-			android:id="@+id/portal_location"
-			android:textColor="@color/grey_b2"
-			tools:text="482 Upper East Coast Road, Singapore 466519"
-			font:typeface="roboto_regular"
-			android:layout_height="wrap_content"/>
+    <com.devspark.robototextview.widget.RobotoTextView
+            android:layout_width="match_parent"
+            android:textSize="14sp"
+            android:id="@+id/portal_location"
+            android:textColor="@color/grey_b2"
+            tools:text="482 Upper East Coast Road, Singapore 466519"
+            font:typeface="roboto_regular"
+            android:layout_height="wrap_content"/>
 
-	<View
-			style="@style/Separator"
-			android:layout_marginTop="8dp"
-			android:layout_marginBottom="8dp"/>
+    <View
+            style="@style/Separator"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
 
-	<LinearLayout
-			android:layout_width="match_parent"
-			android:orientation="horizontal"
-			android:baselineAligned="false"
-			android:layout_height="wrap_content">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:layout_height="wrap_content">
 
-		<LinearLayout
-				android:layout_width="0dp"
-				android:orientation="vertical"
-				android:baselineAligned="false"
-				android:layout_weight="1"
-				android:layout_height="wrap_content">
+        <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:baselineAligned="false"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-			<com.devspark.robototextview.widget.RobotoTextView
-					android:layout_width="wrap_content"
-					android:id="@+id/owner"
-					android:textSize="15sp"
-					font:typeface="roboto_regular"
-					android:textColor="@color/text_blue_resistance"
-					tools:text="@FuzzyPillow"
-					android:layout_height="wrap_content"/>
+            <com.devspark.robototextview.widget.RobotoTextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/owner"
+                    android:textSize="15sp"
+                    font:typeface="roboto_regular"
+                    android:textColor="@color/text_blue_resistance"
+                    tools:text="@FuzzyPillow"
+                    android:layout_height="wrap_content"/>
 
-			<com.devspark.robototextview.widget.RobotoTextView
-					android:layout_width="wrap_content"
-					android:id="@+id/mature_date"
-					font:typeface="roboto_regular"
-					android:textSize="15sp"
-					tools:text="Mature on May 18 2013 at 1:46pm"
-					android:layout_height="wrap_content"/>
+            <com.devspark.robototextview.widget.RobotoTextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/mature_date"
+                    font:typeface="roboto_regular"
+                    android:textSize="15sp"
+                    tools:text="Mature on May 18 2013 at 1:46pm"
+                    android:layout_height="wrap_content"/>
 
-		</LinearLayout>
+        </LinearLayout>
 
-		<LinearLayout
-				android:layout_width="wrap_content"
-				android:orientation="vertical"
-				android:layout_gravity="bottom"
-				android:baselineAligned="false"
-				android:layout_height="wrap_content">
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="bottom"
+                android:baselineAligned="false"
+                android:layout_height="wrap_content">
 
-			<com.devspark.robototextview.widget.RobotoTextView
-					android:layout_width="wrap_content"
-					android:text="@string/day"
-					android:textSize="14sp"
-					android:layout_gravity="right"
-					android:textColor="@color/grey_70"
-					font:typeface="roboto_regular"
-					android:layout_height="wrap_content"/>
+            <com.devspark.robototextview.widget.RobotoTextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/day"
+                    android:textSize="14sp"
+                    android:layout_gravity="right"
+                    android:textColor="@color/grey_70"
+                    font:typeface="roboto_regular"
+                    android:layout_height="wrap_content"/>
 
-			<com.devspark.robototextview.widget.RobotoTextView
-					android:layout_width="wrap_content"
-					font:typeface="roboto_condensed_bold"
-					android:textSize="35sp"
-					android:textColor="@color/grey_70"
-					android:id="@+id/age"
-					tools:text="33"
-					android:layout_height="wrap_content"/>
+            <com.devspark.robototextview.widget.RobotoTextView
+                    android:layout_width="wrap_content"
+                    font:typeface="roboto_condensed_bold"
+                    android:textSize="35sp"
+                    android:textColor="@color/grey_70"
+                    android:id="@+id/age"
+                    tools:text="33"
+                    android:layout_height="wrap_content"/>
 
-		</LinearLayout>
+        </LinearLayout>
 
-	</LinearLayout>
+    </LinearLayout>
 
 </merge>

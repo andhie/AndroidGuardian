@@ -11,34 +11,34 @@ import android.view.MenuItem;
 public class PortalDetailActivity extends ActionBarActivity {
 
     public static void show(Context context) {
-	Intent intent = new Intent(context, PortalDetailActivity.class);
-	context.startActivity(intent);
+        Intent intent = new Intent(context, PortalDetailActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-	if (savedInstanceState == null) {
-	    Fragment fragment = PortalDetailFragment.newInstance();
+        if (savedInstanceState == null) {
+            Fragment fragment = PortalDetailFragment.newInstance();
 
-	    getSupportFragmentManager()
-		    .beginTransaction()
-		    .add(R.id.content_frame, fragment)
-		    .commit();
-	}
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.content_frame, fragment)
+                    .commit();
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	switch (item.getItemId()) {
-	    case android.R.id.home:
-		NavUtils.navigateUpFromSameTask(this);
-		break;
-	}
-	return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

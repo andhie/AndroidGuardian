@@ -11,84 +11,84 @@ public class Events {
 
     public static class OnNewLivePortalListEvent {
 
-	private List<GuardianPortal> list;
+        private List<GuardianPortal> list;
 
-	public OnNewLivePortalListEvent(List<GuardianPortal> list) {
-	    this.list = list;
-	}
+        public OnNewLivePortalListEvent(List<GuardianPortal> list) {
+            this.list = list;
+        }
 
-	public List<GuardianPortal> getList() {
-	    return list;
-	}
+        public List<GuardianPortal> getList() {
+            return list;
+        }
 
     }
 
     public static class OnNewDeadPortalListEvent {
 
-	private List<GuardianPortal> list;
+        private List<GuardianPortal> list;
 
-	public OnNewDeadPortalListEvent(List<GuardianPortal> list) {
-	    this.list = list;
-	}
+        public OnNewDeadPortalListEvent(List<GuardianPortal> list) {
+            this.list = list;
+        }
 
-	public List<GuardianPortal> getList() {
-	    return list;
-	}
+        public List<GuardianPortal> getList() {
+            return list;
+        }
 
     }
 
     public static class OnNoNewPortalData {
 
-	private String type;
+        private String type;
 
-	public OnNoNewPortalData(String type) {
-	    this.type = type;
-	}
+        public OnNoNewPortalData(String type) {
+            this.type = type;
+        }
 
-	public String getPortalDataType() {
-	    return type;
-	}
+        public String getPortalDataType() {
+            return type;
+        }
     }
 
     public static class OnLoadFromFileEvent {
 
-	private List<GuardianPortal> list;
+        private List<GuardianPortal> list;
 
-	public OnLoadFromFileEvent(List<GuardianPortal> list) {
-	    this.list = list;
-	}
+        public OnLoadFromFileEvent(List<GuardianPortal> list) {
+            this.list = list;
+        }
 
-	public List<GuardianPortal> getList() {
-	    return list;
-	}
+        public List<GuardianPortal> getList() {
+            return list;
+        }
 
     }
 
     public static class OnAddressResolved {
 
-	private String address;
+        private String address;
 
-	public OnAddressResolved(String address) {
-	    this.address = address;
-	}
+        public OnAddressResolved(String address) {
+            this.address = address;
+        }
 
-	public String getAddress() {
-	    return address;
-	}
+        public String getAddress() {
+            return address;
+        }
 
     }
 
     public static class onRequestPortalDetail {
 
-	private GuardianPortal portal;
+        private GuardianPortal portal;
 
-	public onRequestPortalDetail(GuardianPortal portal) {
-	    this.portal = portal;
-	}
+        public onRequestPortalDetail(GuardianPortal portal) {
+            this.portal = portal;
+        }
 
-	public GuardianPortal getPortal() {
-	    return portal;
-	}
+        public GuardianPortal getPortal() {
+            return portal;
+        }
 
     }
 }

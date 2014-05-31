@@ -18,39 +18,39 @@ public class GPListAdapter extends ArrayAdapter<GuardianPortal> implements Filte
     List<GuardianPortal> origValues;
 
     public GPListAdapter(Context context, List<GuardianPortal> objects) {
-	super(context, 0, objects);
-	this.values = objects;
-	this.origValues = objects;
+        super(context, 0, objects);
+        this.values = objects;
+        this.origValues = objects;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-	PortalCard card;
-	if (convertView == null) {
-	    card = new PortalCard(getContext());
-	} else {
-	    card = (PortalCard) convertView;
-	}
+        PortalCard card;
+        if (convertView == null) {
+            card = new PortalCard(getContext());
+        } else {
+            card = (PortalCard) convertView;
+        }
 
-	GuardianPortal portal = getItem(position);
-	card.setData(portal);
+        GuardianPortal portal = getItem(position);
+        card.setData(portal);
 
-	return card;
+        return card;
     }
 
     @Override
     public int getCount() {
-	return values.size();
+        return values.size();
     }
 
     @Override
     public GuardianPortal getItem(int position) {
-	return values.get(position);
+        return values.get(position);
     }
 
     public List<GuardianPortal> getAll() {
-	return values;
+        return values;
     }
 
 //    @Override

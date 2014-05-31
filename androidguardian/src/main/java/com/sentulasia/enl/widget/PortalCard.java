@@ -20,18 +20,18 @@ import android.widget.TextView;
 public class PortalCard extends LinearLayout {
 
     public PortalCard(Context context) {
-	super(context);
-	init();
+        super(context);
+        init();
     }
 
     public PortalCard(Context context, AttributeSet attrs) {
-	super(context, attrs);
-	init();
+        super(context, attrs);
+        init();
     }
 
     public PortalCard(Context context, AttributeSet attrs, int defStyle) {
-	super(context, attrs, defStyle);
-	init();
+        super(context, attrs, defStyle);
+        init();
     }
 
     private TextView mPortalName;
@@ -46,57 +46,57 @@ public class PortalCard extends LinearLayout {
 
     private void init() {
 
-	setOrientation(VERTICAL);
-	setBackgroundResource(R.drawable.card_bg);
-	int pad = Util.toPx(getContext(), 15);
-	setPadding(pad, pad, pad, pad);
+        setOrientation(VERTICAL);
+        setBackgroundResource(R.drawable.card_bg);
+        int pad = Util.toPx(getContext(), 15);
+        setPadding(pad, pad, pad, pad);
 
-	View v = LayoutInflater.from(getContext()).inflate(R.layout.card_portal, this, true);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.card_portal, this, true);
 
-	mPortalName = (TextView) v.findViewById(R.id.portal_name);
-	mPortalLocation = (TextView) v.findViewById(R.id.portal_location);
-	mOwner = (TextView) v.findViewById(R.id.owner);
-	mMatureDate = (TextView) v.findViewById(R.id.mature_date);
-	mAge = (TextView) v.findViewById(R.id.age);
+        mPortalName = (TextView) v.findViewById(R.id.portal_name);
+        mPortalLocation = (TextView) v.findViewById(R.id.portal_location);
+        mOwner = (TextView) v.findViewById(R.id.owner);
+        mMatureDate = (TextView) v.findViewById(R.id.mature_date);
+        mAge = (TextView) v.findViewById(R.id.age);
     }
 
     private SpannableStringBuilder ssb;
 
     public void setData(GuardianPortal portal) {
-	mPortalName.setText(portal.getPortal_name());
-	mPortalLocation.setText(portal.getLocation());
-	mOwner.setText(portal.getAgent_name());
+        mPortalName.setText(portal.getPortal_name());
+        mPortalLocation.setText(portal.getLocation());
+        mOwner.setText(portal.getAgent_name());
 
-	int age = portal.getPortalAge();
-	int badgeId = Util.getBadge(age);
+        int age = portal.getPortalAge();
+        int badgeId = Util.getBadge(age);
 
-	mAge.setText(String.valueOf(age));
-	mAge.setCompoundDrawablesWithIntrinsicBounds(badgeId, 0, 0, 0);
+        mAge.setText(String.valueOf(age));
+        mAge.setCompoundDrawablesWithIntrinsicBounds(badgeId, 0, 0, 0);
 
-	if (portal.isLive()) {
-	    mMatureDate.setText(portal.printGuardianMilestone());
-	    mMatureDate.setTextColor(Color.BLACK);
-	} else {
+        if (portal.isLive()) {
+            mMatureDate.setText(portal.printGuardianMilestone());
+            mMatureDate.setTextColor(Color.BLACK);
+        } else {
 
-	    if (ssb == null) {
-		ssb = new SpannableStringBuilder();
-	    }
+            if (ssb == null) {
+                ssb = new SpannableStringBuilder();
+            }
 
-	    String destroyer = portal.getDestroyed_by();
+            String destroyer = portal.getDestroyed_by();
 
-	    ssb.clear();
-	    ssb.append("Tears collected by ").append(destroyer);
-	    ssb.setSpan(new ForegroundColorSpan(
-		    getResources().getColor(R.color.text_green_enlightened)),
-		    ssb.length() - destroyer.length(),
-		    ssb.length(),
-		    SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE
-	    );
+            ssb.clear();
+            ssb.append("Tears collected by ").append(destroyer);
+            ssb.setSpan(new ForegroundColorSpan(
+                            getResources().getColor(R.color.text_green_enlightened)),
+                    ssb.length() - destroyer.length(),
+                    ssb.length(),
+                    SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
 
-	    mMatureDate.setText(ssb);
-	    Util.setStrikeThru(mAge);
-	    Util.setStrikeThru(mOwner);
-	}
+            mMatureDate.setText(ssb);
+            Util.setStrikeThru(mAge);
+            Util.setStrikeThru(mOwner);
+        }
     }
 
 }
