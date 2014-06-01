@@ -36,7 +36,7 @@ dependencies {
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:4.4.52'
     compile 'com.koushikdutta.ion:ion:1.2.7'
-    compile 'com.github.johnkil.android-robototextview:robototextview:2.0.1'
+    compile 'uk.co.chrisjenx:calligraphy:0.7.+'
     compile 'joda-time:joda-time:2.3'
     compile 'de.greenrobot:eventbus:2.2.1'
     compile('de.keyboardsurfer.android.widget:crouton:1.8.4') {

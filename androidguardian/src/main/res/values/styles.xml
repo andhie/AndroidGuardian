@@ -24,4 +24,15 @@
         <item name="android:layout_height">1dp</item>
     </style>
 
+    <style name="RobotoLightItalic">
+        <item name="fontPath">fonts/Roboto-LightItalic.ttf</item>
+    </style>
+
+    <style name="RobotoBold">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="RobotoCondensedBold">
+        <item name="fontPath">fonts/RobotoCondensed-Bold.ttf</item>
+    </style>
 </resources>

@@ -54,6 +54,6 @@
 
 # Required for EventBus
 -keepclassmembers class ** {
-public void onEvent*(**);
+    public void onEvent*(**);
 }
 

@@ -8,11 +8,18 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class PortalDetailActivity extends FragmentActivity {
 
     public static void show(Context context) {
         Intent intent = new Intent(context, PortalDetailActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase, R.attr.fontPath));
     }
 
     @Override
