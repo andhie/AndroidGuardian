@@ -28,6 +28,7 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -533,7 +534,11 @@ public class GPListFragment extends Fragment implements
                         .replace(R.id.detail_frame, PortalDetailFragment.newInstance())
                         .commit();
             } else {
-                PortalDetailActivity.show(getActivity());
+                Bundle options = ActivityOptionsCompat
+                        .makeScaleUpAnimation(view, 0, 0, view.getWidth(), view.getHeight())
+                        .toBundle();
+
+                PortalDetailActivity.show(getActivity(), options);
             }
 
         }

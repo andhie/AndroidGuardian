@@ -1,8 +1,10 @@
 package com.sentulasia.enl;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -15,6 +17,11 @@ public class PortalDetailActivity extends FragmentActivity {
     public static void show(Context context) {
         Intent intent = new Intent(context, PortalDetailActivity.class);
         context.startActivity(intent);
+    }
+
+    public static void show(Activity activity, Bundle options) {
+        Intent intent = new Intent(activity, PortalDetailActivity.class);
+        ActivityCompat.startActivity(activity, intent, options);
     }
 
     @Override
