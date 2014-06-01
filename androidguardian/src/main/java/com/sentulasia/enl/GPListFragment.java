@@ -86,6 +86,10 @@ public class GPListFragment extends Fragment implements
 
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 1069;
 
+    private final static String IS_REFRESHING = "isRefreshing";
+
+    private final static String SORT_TYPE = "sortType";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -121,6 +125,28 @@ public class GPListFragment extends Fragment implements
         mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
         mLocationRequest.setNumUpdates(1);
 
+        if (savedInstanceState != null) {
+            mSwipeRefreshWidget.setRefreshing(savedInstanceState.getBoolean(IS_REFRESHING, false));
+            int type = savedInstanceState.getInt(SORT_TYPE, PortalSorter.SortType.AGE.value());
+
+            if (type == PortalSorter.SortType.AGE.value()) {
+                sortCriteria = new PortalSorter.Age();
+
+            } else if (type == PortalSorter.SortType.NAME.value()) {
+                sortCriteria = new PortalSorter.Name();
+
+            } else if (type == PortalSorter.SortType.OWNER.value()) {
+                sortCriteria = new PortalSorter.Owner();
+
+            } else {
+                mCurrentLocation = mLocationClient.getLastLocation();
+                if (mCurrentLocation != null) {
+                    sortCriteria = new PortalSorter.Distance(mCurrentLocation);
+                }
+
+            }
+        }
+
         return v;
     }
 
@@ -142,6 +168,13 @@ public class GPListFragment extends Fragment implements
     public void onStart() {
         super.onStart();
         mLocationClient.connect();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(IS_REFRESHING, mSwipeRefreshWidget.isRefreshing());
+        outState.putInt(SORT_TYPE, sortCriteria.getSortType().value());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
