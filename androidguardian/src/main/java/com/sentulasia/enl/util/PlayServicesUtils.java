@@ -9,7 +9,12 @@ import android.content.DialogInterface;
 
 public class PlayServicesUtils {
 
-    public static boolean checkGooglePlaySevices(Activity activity) {
+    public static boolean checkGooglePlayServices(Activity activity) {
+        int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
+        return result == ConnectionResult.SUCCESS;
+    }
+
+    public static boolean checkGooglePlaySevicesWithDialog(Activity activity) {
         int errorCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
         switch (errorCode) {
             case ConnectionResult.SUCCESS:

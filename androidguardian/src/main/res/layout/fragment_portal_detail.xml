@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<com.sentulasia.enl.widget.NonInterceptingScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
 
-        <com.sentulasia.enl.widget.ScaleImageView
+        <com.sentulasia.enl.widget.ScaleFrameLayout
                 android:layout_width="match_parent"
-                app:ratio="0.5625"
-                android:id="@+id/image"
-                android:src="@drawable/ingress_icon"
-                android:layout_height="wrap_content"/>
+                app:ratio="1.777"
+                android:id="@+id/frame_map"
+                android:layout_height="0dp">
+
+            <fragment
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    map:mapType="normal"
+                    map:uiZoomControls="true"
+                    map:uiZoomGestures="true"/>
+
+        </com.sentulasia.enl.widget.ScaleFrameLayout>
 
         <TextView
                 style="@style/RobotoLightItalic"
@@ -95,4 +108,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</com.sentulasia.enl.widget.NonInterceptingScrollView>
