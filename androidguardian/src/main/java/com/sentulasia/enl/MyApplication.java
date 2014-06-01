@@ -3,6 +3,8 @@ package com.sentulasia.enl;
 import com.koushikdutta.ion.Ion;
 import com.sentulasia.enl.util.Util;
 
+import net.danlew.android.joda.ResourceZoneInfoProvider;
+
 import android.app.Application;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -17,5 +19,6 @@ public class MyApplication extends Application {
         super.onCreate();
         Ion.getDefault(getApplicationContext()).configure().setGson(Util.getGson());
         CalligraphyConfig.initDefault("fonts/Roboto-Regular.ttf");
+        ResourceZoneInfoProvider.init(this);
     }
 }
