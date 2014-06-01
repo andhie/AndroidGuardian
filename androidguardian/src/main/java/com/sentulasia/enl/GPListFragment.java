@@ -12,11 +12,13 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.sentulasia.enl.model.GuardianPortal;
 import com.sentulasia.enl.model.ScorePair;
+import com.sentulasia.enl.service.GetHashListService;
 import com.sentulasia.enl.util.Events;
 import com.sentulasia.enl.util.FileUtil;
 import com.sentulasia.enl.util.LoadFromFileTask;
 import com.sentulasia.enl.util.PlayServicesUtils;
 import com.sentulasia.enl.util.PortalSorter;
+import com.sentulasia.enl.util.PrefUtil;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -27,6 +29,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,6 +81,8 @@ public class GPListFragment extends Fragment implements
 
     private SearchView mSearchView;
 
+    private SwipeRefreshLayout mSwipeRefreshWidget;
+
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 1069;
 
     @Override
@@ -97,6 +102,11 @@ public class GPListFragment extends Fragment implements
         View header = inflater.inflate(R.layout.list_item_header, mListView, false);
         mHeaderTitle = (TextView) header.findViewById(R.id.title);
         mHeaderSubtitle = (TextView) header.findViewById(R.id.subtitle);
+
+        mSwipeRefreshWidget = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_widget);
+        mSwipeRefreshWidget.setOnRefreshListener(onSwipeRefresh);
+        mSwipeRefreshWidget
+                .setColorScheme(R.color.color1, R.color.color2, R.color.color3, R.color.color4);
 
         mListView.addHeaderView(header, null, false);
         mListView.setOnItemClickListener(onItemClick);
@@ -228,6 +238,10 @@ public class GPListFragment extends Fragment implements
             }
         }
 
+        if (mSwipeRefreshWidget.isRefreshing()) {
+            mSwipeRefreshWidget.setRefreshing(false);
+        }
+
     }
 
     public void onEventMainThread(Events.OnNewDeadPortalListEvent event) {
@@ -241,6 +255,10 @@ public class GPListFragment extends Fragment implements
             }
         }
 
+        if (mSwipeRefreshWidget.isRefreshing()) {
+            mSwipeRefreshWidget.setRefreshing(false);
+        }
+
     }
 
     public void onEventMainThread(Events.OnNoNewPortalData event) {
@@ -248,6 +266,10 @@ public class GPListFragment extends Fragment implements
                 "No new " + event.getPortalDataType() + " Portal updates",
                 Style.INFO)
                 .show();
+
+        if (mSwipeRefreshWidget.isRefreshing()) {
+            mSwipeRefreshWidget.setRefreshing(false);
+        }
     }
 
     private String currentAddress;
@@ -489,6 +511,16 @@ public class GPListFragment extends Fragment implements
                 adapter.getFilter().filter(newText);
             }
             return true;
+        }
+    };
+
+    private SwipeRefreshLayout.OnRefreshListener onSwipeRefresh
+            = new SwipeRefreshLayout.OnRefreshListener() {
+
+        @Override
+        public void onRefresh() {
+            GetHashListService.execute(getActivity());
+            PrefUtil.setLastUpdateTime(getActivity(), System.currentTimeMillis());
         }
     };
 

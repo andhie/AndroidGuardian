@@ -5,6 +5,12 @@
     <color name="grey_33">#333333</color>
     <color name="grey_b2">#B2B2B2</color>
 
-    <color name="text_blue_resistance">#ff009eff</color>
-    <color name="text_green_enlightened">#ff2bed1b</color>
+    <color name="text_blue_resistance">#FF009EFF</color>
+    <color name="text_green_enlightened">#FF2BED1B</color>
+
+    <!-- Swipe Refresh Colors -->
+    <color name="color1">#FF2BED1B</color>
+    <color name="color2">#FF009EFF</color>
+    <color name="color3">#B32BED1B</color>
+    <color name="color4">#B3009EFF</color>
 </resources>
