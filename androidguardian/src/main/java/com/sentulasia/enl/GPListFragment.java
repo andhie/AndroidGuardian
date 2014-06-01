@@ -26,6 +26,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -317,6 +318,14 @@ public class GPListFragment extends Fragment implements
         if (list.isEmpty() && adapter == null) {
             mProgressBar.show();
             return;
+        }
+
+        /*
+         * Workaround for Issue 63545: Fast Scroll in 4.4
+         * https://code.google.com/p/android/issues/detail?id=63545
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mListView.setFastScrollAlwaysVisible(true);
         }
 
         adapter = new GPListAdapter(getActivity(), list);
