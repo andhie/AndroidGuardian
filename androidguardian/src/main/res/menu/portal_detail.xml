@@ -1,16 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/action_share"
-            android:title="Share Link"
-            android:showAsAction="always"
-            android:actionProviderClass="android.widget.ShareActionProvider"/>
+        android:id="@+id/action_share"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="always"
+        android:title="Share Link" />
 
     <item
-            android:id="@+id/action_navigate"
-            android:orderInCategory="101"
-            android:showAsAction="never"
-            android:title="@string/action_navigate"/>
+        android:id="@+id/action_navigate"
+        android:orderInCategory="101"
+        android:showAsAction="never"
+        android:title="@string/action_navigate" />
 
 
 </menu>

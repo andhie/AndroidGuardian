@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:paddingLeft="4dp"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="4dp">
 
     <TextView
-            style="@style/RobotoLightItalic"
-            android:layout_width="wrap_content"
-            android:id="@+id/title"
-            android:textSize="24sp"
-            android:textColor="@color/grey_33"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/title"
+        style="@style/RobotoLightItalic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_33"
+        android:textSize="24sp" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:drawableLeft="@drawable/ic_location"
-            android:textColor="@color/grey_b2"
-            android:drawablePadding="8dp"
-            android:textSize="15sp"
-            android:id="@+id/subtitle"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_location"
+        android:drawablePadding="8dp"
+        android:textColor="@color/grey_b2"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
 </LinearLayout>

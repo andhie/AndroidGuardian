@@ -1,88 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:tools="http://schemas.android.com/tools"
-       android:orientation="vertical"
-       android:layout_width="match_parent"
-       tools:container="LinearLayout"
-       android:baselineAligned="false"
-       android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    tools:container="LinearLayout">
 
     <TextView
-            style="@style/RobotoBold"
-            android:layout_width="match_parent"
-            android:id="@+id/portal_name"
-            android:textSize="22sp"
-            android:textColor="@color/grey_70"
-            tools:text="Calvary Assembly of God"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/portal_name"
+        style="@style/RobotoBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_70"
+        android:textSize="22sp"
+        tools:text="Calvary Assembly of God" />
 
     <TextView
-            android:layout_width="match_parent"
-            android:textSize="14sp"
-            android:id="@+id/portal_location"
-            android:textColor="@color/grey_b2"
-            tools:text="482 Upper East Coast Road, Singapore 466519"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/portal_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_b2"
+        android:textSize="14sp"
+        tools:text="482 Upper East Coast Road, Singapore 466519" />
 
     <View
-            style="@style/Separator"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+        style="@style/Separator"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp" />
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:baselineAligned="false"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <LinearLayout
-                android:layout_width="0dp"
-                android:orientation="vertical"
-                android:baselineAligned="false"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:orientation="vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/owner"
-                    android:textSize="15sp"
-                    android:textColor="@color/text_blue_resistance"
-                    tools:text="@FuzzyPillow"
-                    android:layout_height="wrap_content"/>
+                android:id="@+id/owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_blue_resistance"
+                android:textSize="15sp"
+                tools:text="@FuzzyPillow" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/mature_date"
-                    android:textSize="15sp"
-                    tools:text="Mature on May 18 2013 at 1:46pm"
-                    android:layout_height="wrap_content"/>
+                android:id="@+id/mature_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                tools:text="Mature on May 18 2013 at 1:46pm" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:baselineAligned="false"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="bottom"
-                android:baselineAligned="false"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/day"
+                android:textColor="@color/grey_70"
+                android:textSize="14sp" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:text="@string/day"
-                    android:textSize="14sp"
-                    android:layout_gravity="right"
-                    android:textColor="@color/grey_70"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    style="@style/RobotoCondensedBold"
-                    android:layout_width="wrap_content"
-                    android:textSize="35sp"
-                    android:textColor="@color/grey_70"
-                    android:id="@+id/age"
-                    tools:text="33"
-                    android:layout_height="wrap_content"/>
+                android:id="@+id/age"
+                style="@style/RobotoCondensedBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_70"
+                android:textSize="35sp"
+                tools:text="33" />
 
         </LinearLayout>
 
